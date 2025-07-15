@@ -3,6 +3,7 @@ import { useEffect, useRef, useState } from "react"
 import Link from "next/link"
 import { Button } from "@/components/ui/button"
 import { ArrowRight, Star } from "lucide-react"
+import Image from "next/image"
 
 const programs = [
   {
@@ -89,9 +90,11 @@ export default function ProgramsSection() {
               style={{ transitionDelay: `${index * 150}ms` }}
             >
               <div className="relative h-56 overflow-hidden">
-                <img
+                <Image
                   src={program.image || "/images/prueba.jpg"}
                   alt={program.title}
+                  width={520}
+                  height={520}
                   className="w-full h-full object-cover transition-transform duration-500 hover:scale-105"
                 />
                 {/* Rating badge */}

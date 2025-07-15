@@ -1,5 +1,6 @@
 import Link from "next/link"
 import { Heart, MapPin, Phone, Mail, MessageCircle, Clock } from "lucide-react"
+import Image from "next/image"
 
 export default function Footer() {
   return (
@@ -12,7 +13,8 @@ export default function Footer() {
             <div className="lg:col-span-2 space-y-6">
               <div className="flex items-center space-x-4">
                 <div className="w-16 h-16 bg-green-500 rounded-2xl flex items-center justify-center shadow-lg">
-                  <img src="/images/logotipo.png" alt="Shaddai Day-Care Logo" className="w-12 h-12 object-contain" />
+                  <Image src="/images/logotipo.png" alt="Shaddai Day-Care Logo"  width={48}
+                height={48} className="w-12 h-12 object-contain" />
                 </div>
                 <div>
                   <span className="text-3xl font-bold text-white">SHADDAI</span>

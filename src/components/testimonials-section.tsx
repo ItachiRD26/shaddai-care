@@ -3,6 +3,7 @@
 import { useEffect, useRef, useState } from "react"
 import { Card, CardContent } from "@/components/ui/card"
 import { Star, Quote, ChevronLeft, ChevronRight, Play } from "lucide-react"
+import Image from "next/image"
 
 const testimonials = [
   {
@@ -11,7 +12,7 @@ const testimonials = [
       "Shaddai Day-Care ha sido una bendición para nuestra familia. El personal realmente se preocupa por el desarrollo de cada niño, y vemos a nuestra hija crecer más segura cada día.",
     parentName: "María González",
     childInfo: "Madre de Sofía, 3 años",
-    image: "//images/prueba.jpg?height=100&width=100&text=MG",
+    image: "/images/prueba.jpg?height=100&width=100&text=MG",
     rating: 5,
     color: "green",
     program: "Guardería Plan Básico",
@@ -24,7 +25,7 @@ const testimonials = [
       "La metodología que utilizan es increíble. Mi hijo ha desarrollado habilidades sociales y cognitivas que no esperaba a su edad. Los recomiendo completamente.",
     parentName: "Carlos Rodríguez",
     childInfo: "Padre de Diego, 4 años",
-    image: "//images/prueba.jpg?height=100&width=100&text=CR",
+    image: "/images/prueba.jpg?height=100&width=100&text=CR",
     rating: 5,
     color: "blue",
     program: "Inglés para Niños",
@@ -241,15 +242,17 @@ export default function TestimonialsSection() {
 
                   {/* Quote */}
                   <blockquote className="text-2xl text-gray-700 italic mb-10 leading-relaxed max-w-4xl mx-auto">
-                    "{currentTestimonial.quote}"
+                    &ldquo;{currentTestimonial.quote}&rdquo;
                   </blockquote>
 
                   {/* Author Info */}
                   <div className="flex items-center justify-center space-x-6 mb-8">
                     <div className="relative">
-                      <img
+                      <Image
                         src={currentTestimonial.image || "/images/prueba.jpg"}
                         alt={`Testimonio de ${currentTestimonial.parentName}`}
+                        width={80}
+                        height={80}
                         className="w-20 h-20 rounded-full border-4 border-white shadow-xl"
                       />
                       {currentTestimonial.videoTestimonial && (
@@ -314,9 +317,11 @@ export default function TestimonialsSection() {
                 >
                   <CardContent className="p-6">
                     <div className="flex items-center space-x-4 mb-4">
-                      <img
+                      <Image
                         src={testimonial.image || "/images/prueba.jpg"}
                         alt={testimonial.parentName}
+                        width={48}
+                        height={48}
                         className="w-12 h-12 rounded-full border-2 border-gray-200"
                       />
                       <div>
@@ -325,7 +330,9 @@ export default function TestimonialsSection() {
                       </div>
                       {testimonial.videoTestimonial && <Play className="w-4 h-4 text-red-500 ml-auto" />}
                     </div>
-                    <p className="text-gray-600 text-sm leading-relaxed line-clamp-3">"{testimonial.quote}"</p>
+                    <p className="text-gray-600 text-sm leading-relaxed line-clamp-3">
+                      &ldquo;{testimonial.quote}&rdquo;
+                    </p>
                     <div className="flex items-center justify-between mt-4">
                       <div className="flex">
                         {[...Array(testimonial.rating)].map((_, i) => (

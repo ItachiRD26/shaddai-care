@@ -9,11 +9,11 @@ export default function SchoolHeroRedesign() {
     <section className="relative h-screen flex items-center justify-center overflow-hidden bg-gradient-to-br from-slate-900 via-blue-900 to-slate-800">
       {/* Animated background elements */}
       <div className="absolute inset-0">
-        {/* Primary background image */}
         <Image
-          src="/images/school-hero.jpg?height=1080&width=1920"
+          src="/images/school-hero.jpg"
           alt="Campus de Shaddai School"
-          fill
+          width={1920}
+          height={1080}
           priority
           className="object-cover opacity-20"
         />
@@ -81,7 +81,7 @@ export default function SchoolHeroRedesign() {
 
         {/* Call to action button */}
         <div className="flex justify-center px-4">
-          <Link href="/shaddai-school/propuesta" className="w-full sm:w-auto">
+          <Link href="/shaddai-school" className="w-full sm:w-auto">
             <Button className="cursor-pointer relative group bg-blue-900 backdrop-blur-sm hover:bg-slate-700/90 text-white font-semibold px-4 sm:px-10 py-3 sm:py-5 text-sm sm:text-lg shadow-xl hover:shadow-2xl transition-all duration-300 transform hover:scale-[1.02] hover:-translate-y-0.5 rounded-xl border border-white/20 hover:border-white/30 overflow-hidden w-full sm:min-w-[320px] max-w-[350px]">
               {/* Subtle glow effect */}
               <div className="absolute inset-0 bg-gradient-to-r from-blue-500/10 to-cyan-500/10 opacity-0 group-hover:opacity-100 transition-opacity duration-300 rounded-xl"></div>

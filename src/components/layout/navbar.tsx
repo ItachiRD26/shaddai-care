@@ -4,6 +4,7 @@ import { useState, useEffect } from "react"
 import Link from "next/link"
 import { Button } from "@/components/ui/button"
 import { Menu, X, Heart } from "lucide-react"
+import Image from "next/image"
 
 export default function Navbar() {
   const [isOpen, setIsOpen] = useState(false)
@@ -28,7 +29,13 @@ export default function Navbar() {
           <Link href="/" className="flex items-center space-x-4 group">
             <div className="relative">
               <div className="w-16 h-16 bg-white/10 rounded-2xl flex items-center justify-center shadow-lg border border-white/20">
-                <img src="/images/logotipo.png" alt="Shaddai Day-Care Logo" className="w-12 h-12 object-contain" />
+              <Image
+                src="/images/logotipo.png"
+                alt="Shaddai Day-Care Logo"
+                width={48}
+                height={48}
+                className="w-12 h-12 object-contain"
+              />
               </div>
               <div className="absolute -top-1 -right-1 w-6 h-6 bg-pink-500 rounded-full flex items-center justify-center shadow-lg">
                 <Heart className="w-3 h-3 text-white fill-current" />
