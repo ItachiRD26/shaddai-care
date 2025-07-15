@@ -13,7 +13,7 @@ const programs = [
     price: "$4,500",
     period: "/mes",
     description: "Atención personalizada y un entorno amoroso para los más pequeños.",
-    image: "/images/programs-1.jpeg",
+    image: "/images/programs-1.webp",
     rating: 4.9,
   },
   {
@@ -23,7 +23,7 @@ const programs = [
     price: "Desde $2,800",
     period: "/mes",
     description: "Aprendizaje del inglés con juegos, canciones y profesores especializados.",
-    image: "/images/programs-2.jpeg",
+    image: "/images/programs-2.webp",
     rating: 4.8,
   },
   {
@@ -33,7 +33,7 @@ const programs = [
     price: "$3,500",
     period: "/2 semanas",
     description: "Un verano lleno de diversión, talleres creativos y excursiones educativas.",
-    image: "/images/programs-3.jpeg",
+    image: "/images/programs-3.webp",
     rating: 5.0,
   },
 ]
@@ -58,7 +58,7 @@ export default function ProgramsSection() {
       ref={sectionRef}
       className="relative py-24"
       style={{
-        backgroundImage: "url('/images/programs-bg.jpeg')",
+        backgroundImage: "url('/images/programs-bg.webp')",
         backgroundSize: "cover",
         backgroundPosition: "center",
         backgroundRepeat: "no-repeat",

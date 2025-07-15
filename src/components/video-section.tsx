@@ -26,7 +26,7 @@ export default function VideoSection() {
       ref={sectionRef}
       className="relative py-16 min-h-[90vh] flex items-center justify-center"
       style={{
-        backgroundImage: "url('/images/video-bg.jpeg?height=1080&width=1920&text=Director+Welcome+Background')",
+        backgroundImage: "url('/images/video-bg.webp?height=1080&width=1920&text=Director+Welcome+Background')",
         backgroundSize: "cover",
         backgroundPosition: "center",
         backgroundRepeat: "no-repeat",

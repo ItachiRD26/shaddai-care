@@ -9,7 +9,7 @@ const heroSlides = [
   {
     id: 1,
     programName: "SHADDAI SCHOOL",
-    backgroundImage: "/images/hero-1.jpeg",
+    backgroundImage: "/images/hero-1.webp",
     icon: GraduationCap,
     primaryColor: "blue",
     link: "/shaddai-school",
@@ -18,7 +18,7 @@ const heroSlides = [
   {
     id: 2,
     programName: "SHADDAI DAY-CARE",
-    backgroundImage: "/images/hero-2.jpeg",
+    backgroundImage: "/images/hero-2.webp",
     icon: Heart,
     primaryColor: "green",
     link: "/shaddai-daycare",
@@ -26,7 +26,7 @@ const heroSlides = [
   {
     id: 3,
     programName: "GRACE LEARNING CENTER",
-    backgroundImage: "/images/hero-3.jpeg",
+    backgroundImage: "/images/hero-3.webp",
     icon: BookOpen,
     primaryColor: "orange",
     link: "/grace-learning",
