@@ -2,25 +2,379 @@
 
 :root {
   --background: #ffffff;
-  --foreground: #171717;
+  --foreground: #0f172a;
+  --card: #ffffff;
+  --card-foreground: #0f172a;
+  --popover: #ffffff;
+  --popover-foreground: #0f172a;
+  --primary: #1d7748;
+  --primary-foreground: #ffffff;
+  --secondary: #f1f5f9;
+  --secondary-foreground: #0f172a;
+  --muted: #f8fafc;
+  --muted-foreground: #64748b;
+  --accent: #fcafc2;
+  --accent-foreground: #0f172a;
+  --destructive: #ef4444;
+  --destructive-foreground: #ffffff;
+  --border: #e2e8f0;
+  --input: #e2e8f0;
+  --ring: #1d7748;
+  --radius: 0.75rem;
+
+  /* Shaddai Day-Care Original Color Palette */
+  --shaddai-green: #1d7748;
+  --shaddai-pink: #fcafc2;
+  --shaddai-blue: #4f75ff;
+  --shaddai-yellow: #ffd44d;
+  --shaddai-orange: #f68026;
+  --shaddai-white: #ffffff;
+
+  /* Professional Shadows */
+  --shadow-sm: 0 1px 2px 0 rgb(0 0 0 / 0.05);
+  --shadow: 0 1px 3px 0 rgb(0 0 0 / 0.1), 0 1px 2px -1px rgb(0 0 0 / 0.1);
+  --shadow-md: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
+  --shadow-lg: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1);
+  --shadow-xl: 0 20px 25px -5px rgb(0 0 0 / 0.1), 0 8px 10px -6px rgb(0 0 0 / 0.1);
+  --shadow-2xl: 0 25px 50px -12px rgb(0 0 0 / 0.25);
+
+  /* Gradients with Original Colors */
+  --hero-gradient: linear-gradient(135deg, #f0fdf4 0%, #dbeafe 100%);
+  --green-gradient: linear-gradient(135deg, #dcfce7 0%, #bbf7d0 100%);
+  --blue-gradient: linear-gradient(135deg, #dbeafe 0%, #bfdbfe 100%);
+  --pink-gradient: linear-gradient(135deg, #fce7f3 0%, #fbcfe8 100%);
+  --orange-gradient: linear-gradient(135deg, #fed7aa 0%, #fdba74 100%);
+  --yellow-gradient: linear-gradient(135deg, #fef3c7 0%, #fde68a 100%);
 }
 
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-popover: var(--popover);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-destructive: var(--destructive);
+  --color-destructive-foreground: var(--destructive-foreground);
+  --color-border: var(--border);
+  --color-input: var(--input);
+  --color-ring: var(--ring);
+
+  /* Shaddai Original Colors */
+  --color-shaddai-green: var(--shaddai-green);
+  --color-shaddai-pink: var(--shaddai-pink);
+  --color-shaddai-blue: var(--shaddai-blue);
+  --color-shaddai-yellow: var(--shaddai-yellow);
+  --color-shaddai-orange: var(--shaddai-orange);
+  --color-shaddai-white: var(--shaddai-white);
+
+  /* Typography - Baloo 2 & Poppins */
+  --font-sans: "Poppins", system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  --font-display: "Baloo 2", "Poppins", system-ui, sans-serif;
+  --font-mono: "JetBrains Mono", "Fira Code", Consolas, monospace;
+
+  /* Border Radius */
+  --radius-sm: 0.375rem;
+  --radius: var(--radius);
+  --radius-md: 0.5rem;
+  --radius-lg: 0.75rem;
+  --radius-xl: 1rem;
+  --radius-2xl: 1.5rem;
+  --radius-3xl: 2rem;
 }
 
 @media (prefers-color-scheme: dark) {
   :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+    --background: #0f172a;
+    --foreground: #f8fafc;
+    --card: #1e293b;
+    --card-foreground: #f8fafc;
+    --popover: #1e293b;
+    --popover-foreground: #f8fafc;
+    --primary: #1d7748;
+    --primary-foreground: #ffffff;
+    --secondary: #1e293b;
+    --secondary-foreground: #f8fafc;
+    --muted: #1e293b;
+    --muted-foreground: #94a3b8;
+    --accent: #fcafc2;
+    --accent-foreground: #0f172a;
+    --destructive: #ef4444;
+    --destructive-foreground: #f8fafc;
+    --border: #334155;
+    --input: #334155;
+    --ring: #1d7748;
   }
+}
+
+/* CRITICAL: Prevent horizontal overflow */
+html,
+body {
+  overflow-x: hidden;
+  max-width: 100vw;
 }
 
 body {
   background: var(--background);
   color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: var(--font-sans);
+  font-feature-settings: "rlig" 1, "calt" 1;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  line-height: 1.6;
+}
+
+/* Ensure all containers respect viewport width */
+* {
+  box-sizing: border-box;
+}
+
+*:before,
+*:after {
+  box-sizing: border-box;
+}
+
+/* Professional Typography with Original Colors */
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-family: var(--font-display);
+  font-weight: 700;
+  line-height: 1.2;
+  letter-spacing: -0.025em;
+}
+
+/* Professional Components with Original Colors */
+.card-professional {
+  background: white;
+  border: 1px solid #e2e8f0;
+  border-radius: var(--radius-xl);
+  box-shadow: var(--shadow-sm);
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.card-professional:hover {
+  box-shadow: var(--shadow-lg);
+  transform: translateY(-2px);
+  border-color: var(--shaddai-green);
+}
+
+.btn-professional {
+  font-weight: 600;
+  padding: 0.75rem 2rem;
+  border-radius: var(--radius-lg);
+  transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+  box-shadow: var(--shadow-sm);
+}
+
+.btn-professional:hover {
+  box-shadow: var(--shadow-md);
+  transform: translateY(-1px);
+}
+
+.btn-primary-professional {
+  background: var(--shaddai-green);
+  color: white;
+  border: none;
+}
+
+.btn-primary-professional:hover {
+  background: color-mix(in srgb, var(--shaddai-green) 90%, black);
+}
+
+.btn-secondary-professional {
+  background: var(--shaddai-pink);
+  color: white;
+  border: 1px solid var(--shaddai-pink);
+}
+
+.btn-secondary-professional:hover {
+  background: color-mix(in srgb, var(--shaddai-pink) 90%, black);
+}
+
+.btn-accent-professional {
+  background: var(--shaddai-blue);
+  color: white;
+  border: none;
+}
+
+.btn-accent-professional:hover {
+  background: color-mix(in srgb, var(--shaddai-blue) 90%, black);
+}
+
+/* Professional Sections with Original Colors */
+.section-professional {
+  padding: 5rem 0;
+}
+
+.container-professional {
+  max-width: 80rem;
+  margin: 0 auto;
+  padding: 0 1rem;
+}
+
+@media (min-width: 640px) {
+  .container-professional {
+    padding: 0 1.5rem;
+  }
+}
+
+@media (min-width: 1024px) {
+  .container-professional {
+    padding: 0 2rem;
+  }
+}
+
+/* Smooth scrolling */
+html {
+  scroll-behavior: smooth;
+}
+
+/* Professional scrollbar with Original Colors */
+::-webkit-scrollbar {
+  width: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background: #f1f5f9;
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--shaddai-green);
+  border-radius: 3px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: color-mix(in srgb, var(--shaddai-green) 80%, black);
+}
+
+/* Focus styles for accessibility */
+.focus-visible {
+  outline: 2px solid var(--shaddai-green);
+  outline-offset: 2px;
+}
+
+/* Professional animations */
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes bounceGentle {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-8px);
+  }
+}
+
+.animate-fade-in-up {
+  animation: fadeInUp 0.6s ease-out;
+}
+
+.animate-fade-in {
+  animation: fadeIn 0.4s ease-out;
+}
+
+.animate-bounce-gentle {
+  animation: bounceGentle 2s infinite;
+}
+
+/* Selection styles with Original Colors */
+::selection {
+  background: color-mix(in srgb, var(--shaddai-pink) 30%, transparent);
+  color: var(--foreground);
+}
+
+::-moz-selection {
+  background: color-mix(in srgb, var(--shaddai-pink) 30%, transparent);
+  color: var(--foreground);
+}
+
+/* Gradient backgrounds with Original Colors */
+.hero-gradient {
+  background: var(--hero-gradient);
+}
+
+.green-gradient {
+  background: var(--green-gradient);
+}
+
+.blue-gradient {
+  background: var(--blue-gradient);
+}
+
+.pink-gradient {
+  background: var(--pink-gradient);
+}
+
+.orange-gradient {
+  background: var(--orange-gradient);
+}
+
+.yellow-gradient {
+  background: var(--yellow-gradient);
+}
+
+/* Print styles */
+@media print {
+  .no-print {
+    display: none !important;
+  }
+
+  body {
+    background: white !important;
+    color: black !important;
+  }
+}
+
+/* High contrast mode support */
+@media (prefers-contrast: high) {
+  :root {
+    --border: #000000;
+    --ring: #000000;
+  }
+}
+
+/* Reduced motion support */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+
+  html {
+    scroll-behavior: auto;
+  }
 }
