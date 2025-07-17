@@ -52,7 +52,7 @@ export default function Navbar() {
           </Link>
 
           <div className="hidden lg:flex items-center space-x-8">
-            {["INICIO", "NOSOTROS", "PROGRAMAS", "INSCRIPCIÓN", "GALERÍA", "CONTACTO"].map((name) => (
+            {["INICIO", "NOSOTROS", "PROGRAMAS", "INSCRIPCIONES", "GALERIA", "CONTACTO"].map((name) => (
               <Link
                 key={name}
                 href={`/${name.toLowerCase() === "inicio" ? "" : name.toLowerCase()}`}
@@ -82,7 +82,7 @@ export default function Navbar() {
                 AGENDAR VISITA
               </Button>
             </Link>
-            <Link href="/inscripcion">
+            <Link href="/inscripciones">
               <Button
                 className={`font-bold rounded-full cursor-pointer px-6 py-2.5 shadow-md transition-all duration-300 ${
                   isScrolled ? "bg-pink-500 text-white hover:bg-pink-400" : "bg-pink-500 text-white hover:bg-pink-400"
@@ -114,7 +114,7 @@ export default function Navbar() {
         <div className="lg:hidden bg-black/60 backdrop-blur-md border-t border-white/10 shadow-xl">
           <div className="px-6 pt-6 pb-8 space-y-5">
             <nav className="flex flex-col space-y-3 text-white text-lg font-medium tracking-wide">
-              {["INICIO", "NOSOTROS", "PROGRAMAS", "INSCRIPCIÓN", "GALERÍA", "CONTACTO"].map((name) => (
+              {["INICIO", "NOSOTROS", "PROGRAMAS", "INSCRIPCIONES", "GALERIA", "CONTACTO"].map((name) => (
                 <Link
                   key={name}
                   href={`/${name.toLowerCase() === "inicio" ? "" : name.toLowerCase()}`}
@@ -135,7 +135,7 @@ export default function Navbar() {
                   AGENDAR VISITA
                 </Button>
               </Link>
-              <Link href="/inscripcion" className="w-full sm:w-auto mt-3 sm:mt-0">
+              <Link href="/inscripciones" className="w-full sm:w-auto mt-3 sm:mt-0">
                 <Button
                   className="w-full bg-pink-500 cursor-pointer text-white hover:bg-pink-400 font-bold rounded-full py-3 text-base shadow-md transition-all duration-300"
                   onClick={() => setIsOpen(false)}

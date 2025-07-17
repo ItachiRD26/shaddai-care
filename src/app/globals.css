@@ -628,6 +628,28 @@ html {
   z-index: 0;
 }
 
+.programs-section-bg {
+  background-image: url('/images/programs-bg-light.webp');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  position: relative;
+}
+
+.programs-section-bg::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: rgba(255, 255, 255, 0.92); /* overlay blanco suave */
+  z-index: 0;
+}
+
+.programs-section-content {
+  position: relative;
+  z-index: 10;
+}
+
 
 
 
