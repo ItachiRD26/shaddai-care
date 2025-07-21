@@ -2,64 +2,41 @@
 
 import { useEffect, useRef, useState } from "react"
 import Image from "next/image"
-import { Star, Quote, ChevronLeft, ChevronRight, Play, Heart, MapPin, Sparkles } from "lucide-react"
+import { Star, Quote, ChevronLeft, ChevronRight, MapPin } from "lucide-react"
 
 const testimonials = [
   {
     id: 1,
     quote:
-      "¡Shaddai es simplemente mágico! Mi hija llega súper feliz todos los días y ha aprendido muchísimo. El personal es increíble y se nota que aman lo que hacen. ¡100% recomendado!",
+      "Shaddai es simplemente increíble. Mi hija llega feliz todos los días y ha aprendido muchísimo. El personal es excepcional y se nota que aman lo que hacen.",
     parentName: "María González",
     childInfo: "Mamá de Sofía, 3 años",
     location: "Valle Feliz",
-    image: "/placeholder.svg?height=120&width=120",
+    image: "/placeholder.svg?height=80&width=80",
     rating: 5,
-    video: true,
-    highlight: "¡Súper Feliz!",
     timeAtCenter: "2 años",
-    bgColor: "bg-gradient-to-br from-pink-100 to-pink-200",
   },
   {
     id: 2,
     quote:
-      "¡No puedo creer lo mucho que ha crecido Diego! Ahora habla inglés, es más sociable y cada día me sorprende con algo nuevo. ¡Shaddai es lo mejor que nos pudo pasar!",
+      "No puedo creer lo mucho que ha crecido Diego. Ahora habla inglés, es más sociable y cada día me sorprende con algo nuevo. Shaddai es lo mejor que nos pudo pasar.",
     parentName: "Carlos Rodríguez",
     childInfo: "Papá de Diego, 4 años",
     location: "Centro",
-    image: "/placeholder.svg?height=120&width=120",
+    image: "/placeholder.svg?height=80&width=80",
     rating: 5,
-    video: false,
-    highlight: "¡Súper Inteligente!",
     timeAtCenter: "1.5 años",
-    bgColor: "bg-gradient-to-br from-blue-100 to-blue-200",
   },
   {
     id: 3,
     quote:
-      "Como mamá trabajadora necesitaba un lugar súper seguro y confiable. ¡Shaddai superó todas mis expectativas! Emma está feliz, segura y aprendiendo un montón. ¡Son increíbles!",
+      "Como mamá trabajadora necesitaba un lugar seguro y confiable. Shaddai superó todas mis expectativas. Emma está feliz, segura y aprendiendo constantemente.",
     parentName: "Ana Martínez",
     childInfo: "Mamá de Emma, 18 meses",
     location: "Residencial Norte",
-    image: "/placeholder.svg?height=120&width=120",
+    image: "/placeholder.svg?height=80&width=80",
     rating: 5,
-    video: true,
-    highlight: "¡Súper Seguro!",
     timeAtCenter: "8 meses",
-    bgColor: "bg-gradient-to-br from-green-100 to-green-200",
-  },
-  {
-    id: 4,
-    quote:
-      "¡Los gemelos están súper adaptados y felices! El ambiente familiar y la atención personalizada han sido perfectos. Los educadores son excepcionales y se nota el amor en todo lo que hacen.",
-    parentName: "Roberto y Carmen Silva",
-    childInfo: "Papás de Mateo y Lucas, 2 años",
-    location: "Las Flores",
-    image: "/placeholder.svg?height=120&width=120",
-    rating: 5,
-    video: false,
-    highlight: "¡Súper Amoroso!",
-    timeAtCenter: "1 año",
-    bgColor: "bg-gradient-to-br from-yellow-100 to-orange-200",
   },
 ]
 
@@ -81,7 +58,6 @@ export default function TestimonialsSection() {
     return () => observer.disconnect()
   }, [])
 
-  // Auto-play functionality
   useEffect(() => {
     if (!isAutoPlaying) return
 
@@ -110,40 +86,31 @@ export default function TestimonialsSection() {
   const currentTestimonial = testimonials[current]
 
   return (
-    <section
-      ref={sectionRef}
-      className="py-24 relative overflow-hidden"
-      style={{
-        backgroundImage: `url('/images/section-4.jpeg')`,
-        backgroundSize: "cover",
-        backgroundPosition: "center",
-        backgroundAttachment: "fixed",
-      }}
-    >
-      {/* Background Overlay */}
-      <div className="absolute inset-0 bg-gradient-to-br from-green-100/90 via-blue-50/85 to-pink-100/90 backdrop-blur-sm" />
+    <section ref={sectionRef} className="py-12 sm:py-16 lg:py-24 bg-gray-50 relative overflow-hidden">
+      {/* Distinctive Element - Quote Bubbles */}
+      <div className="absolute inset-0 pointer-events-none">
+        <div className="absolute top-20 left-16 w-16 h-16 border-2 border-[#fcafc2]/20 rounded-full animate-pulse"></div>
+        <div
+          className="absolute bottom-32 right-20 w-12 h-12 bg-[#ffd44d]/20 rounded-full animate-bounce"
+          style={{ animationDuration: "2s" }}
+        ></div>
+        <Quote className="absolute top-16 right-16 w-8 h-8 text-[#1d7748]/10 animate-pulse" />
+        <Quote
+          className="absolute bottom-20 left-20 w-6 h-6 text-[#4f75ff]/10 animate-pulse"
+          style={{ animationDelay: "1s" }}
+        />
+      </div>
 
-      {/* Fun Background Elements */}
-      <div className="absolute top-16 left-16 w-20 h-20 bg-[color:var(--shaddai-yellow)] rounded-full opacity-30 animate-bounce" />
-      <div className="absolute top-32 right-20 w-16 h-16 bg-[color:var(--shaddai-pink)] rounded-full opacity-40" />
-      <div className="absolute bottom-20 left-1/4 w-18 h-18 bg-[color:var(--shaddai-blue)] rounded-full opacity-35" />
-      <div className="absolute bottom-32 right-1/3 w-14 h-14 bg-[color:var(--shaddai-orange)] rounded-full opacity-30" />
-
-      <div className="relative z-10 max-w-6xl mx-auto px-6">
+      <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 relative">
         {/* Header */}
         <div
-          className={`text-center mb-16 transition-all duration-1000 ${isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-10"}`}
+          className={`text-center mb-12 sm:mb-16 transition-all duration-1000 ${isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-10"}`}
         >
-          <div className="inline-flex items-center gap-2 bg-[color:var(--shaddai-pink)] text-white px-6 py-3 rounded-full text-sm font-bold mb-6 shadow-lg">
-            <Heart className="w-5 h-5" />
-            ¡Familias Súper Felices!
-            <Heart className="w-5 h-5" />
-          </div>
-          <h2 className="text-6xl lg:text-7xl font-display font-bold text-[color:var(--shaddai-green)] mb-6 leading-tight drop-shadow-lg">
-            Testimonios Reales 💕
+          <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-gray-900 mb-4 sm:mb-6">
+            Lo que dicen las familias
           </h2>
-          <p className="text-2xl text-gray-800 max-w-4xl mx-auto leading-relaxed font-medium bg-white/80 backdrop-blur-sm rounded-2xl p-6 shadow-lg">
-            ¡Escucha las experiencias increíbles de nuestras familias y descubre por qué nos aman tanto! 🌟
+          <p className="text-lg sm:text-xl text-gray-600 max-w-3xl mx-auto leading-relaxed">
+            Escucha las experiencias reales de nuestras familias y descubre por qué confían en nosotros
           </p>
         </div>
 
@@ -154,110 +121,101 @@ export default function TestimonialsSection() {
           {/* Navigation Arrows */}
           <button
             onClick={prev}
-            className="absolute left-0 top-1/2 -translate-y-1/2 z-20 bg-[color:var(--shaddai-green)] hover:bg-[color:var(--shaddai-green)]/80 rounded-full p-4 shadow-xl transition-all duration-300 hover:scale-110"
+            className="absolute left-0 top-1/2 -translate-y-1/2 z-20 bg-white hover:bg-gray-50 rounded-full p-2 sm:p-3 shadow-lg transition-all duration-300 hover:scale-105"
           >
-            <ChevronLeft className="w-6 h-6 text-white" />
+            <ChevronLeft className="w-4 h-4 sm:w-5 sm:h-5 text-gray-700" />
           </button>
 
           <button
             onClick={next}
-            className="absolute right-0 top-1/2 -translate-y-1/2 z-20 bg-[color:var(--shaddai-green)] hover:bg-[color:var(--shaddai-green)]/80 rounded-full p-4 shadow-xl transition-all duration-300 hover:scale-110"
+            className="absolute right-0 top-1/2 -translate-y-1/2 z-20 bg-white hover:bg-gray-50 rounded-full p-2 sm:p-3 shadow-lg transition-all duration-300 hover:scale-105"
           >
-            <ChevronRight className="w-6 h-6 text-white" />
+            <ChevronRight className="w-4 h-4 sm:w-5 sm:h-5 text-gray-700" />
           </button>
 
           {/* Testimonial Card */}
-          <div
-            className={`${currentTestimonial.bgColor} backdrop-blur-sm rounded-3xl p-8 lg:p-12 shadow-2xl border-8 border-white transition-all duration-700 ${
-              isVisible ? "opacity-100 translate-y-0 scale-100" : "opacity-0 translate-y-10 scale-95"
-            }`}
-          >
-            <div className="flex flex-col lg:flex-row items-center gap-8">
+          <div className="bg-white rounded-2xl p-6 sm:p-8 lg:p-12 shadow-sm border border-gray-100 mx-8 sm:mx-12 transition-all duration-500 hover:shadow-md">
+            <div className="flex flex-col lg:flex-row items-center gap-6 sm:gap-8">
               {/* Profile Section */}
               <div className="flex-shrink-0 text-center lg:text-left">
-                <div className="relative inline-block mb-6">
+                <div className="relative inline-block mb-4 sm:mb-6">
                   <Image
                     src={currentTestimonial.image || "/placeholder.svg"}
                     alt={currentTestimonial.parentName}
-                    width={120}
-                    height={120}
-                    className="w-32 h-32 lg:w-40 lg:h-40 rounded-full border-8 border-white shadow-xl object-cover"
+                    width={80}
+                    height={80}
+                    className="w-16 h-16 sm:w-20 sm:h-20 lg:w-24 lg:h-24 rounded-full border-4 border-gray-100 shadow-sm object-cover transition-transform duration-300 hover:scale-105"
                   />
-                  {currentTestimonial.video && (
-                    <div className="absolute -bottom-2 -right-2 bg-[color:var(--shaddai-green)] rounded-full p-3 shadow-lg">
-                      <Play className="w-6 h-6 text-white" />
-                    </div>
-                  )}
                 </div>
 
-                <h4 className="text-2xl font-display font-bold text-gray-800 mb-2">{currentTestimonial.parentName}</h4>
-                <p className="text-gray-600 text-lg mb-3">{currentTestimonial.childInfo}</p>
+                <h4 className="text-lg sm:text-xl font-bold text-gray-900 mb-2">{currentTestimonial.parentName}</h4>
+                <p className="text-gray-600 mb-3 text-sm sm:text-base">{currentTestimonial.childInfo}</p>
                 <div className="flex items-center justify-center lg:justify-start gap-2 text-gray-500 mb-4">
-                  <MapPin className="w-4 h-4" />
-                  <span className="text-sm">{currentTestimonial.location}</span>
+                  <MapPin className="w-3 h-3 sm:w-4 sm:h-4" />
+                  <span className="text-xs sm:text-sm">{currentTestimonial.location}</span>
                 </div>
 
                 {/* Rating */}
                 <div className="flex justify-center lg:justify-start gap-1 mb-4">
                   {Array.from({ length: currentTestimonial.rating }).map((_, i) => (
-                    <Star key={i} className="w-6 h-6 text-[color:var(--shaddai-yellow)] fill-current" />
+                    <Star
+                      key={i}
+                      className="w-4 h-4 sm:w-5 sm:h-5 text-[#ffd44d] fill-current animate-pulse"
+                      style={{ animationDelay: `${i * 0.1}s` }}
+                    />
                   ))}
                 </div>
 
                 {/* Time at center */}
-                <div className="inline-flex items-center gap-2 bg-[color:var(--shaddai-green)] text-white px-4 py-2 rounded-full text-sm font-bold shadow-lg">
-                  <Sparkles className="w-4 h-4" />
+                <div className="inline-flex items-center gap-2 bg-[#1d7748] text-white px-2 sm:px-3 py-1 rounded-full text-xs sm:text-sm font-medium">
                   {currentTestimonial.timeAtCenter} con nosotros
                 </div>
               </div>
 
               {/* Quote Section */}
               <div className="flex-1">
-                <Quote className="w-12 h-12 text-[color:var(--shaddai-pink)] mb-6" />
-                <blockquote className="text-gray-800 text-xl lg:text-2xl leading-relaxed mb-8 font-medium bg-white/70 backdrop-blur-sm rounded-xl p-6">
+                <Quote className="w-6 h-6 sm:w-8 sm:h-8 text-[#1d7748] mb-4 sm:mb-6" />
+                <blockquote className="text-gray-700 text-base sm:text-lg lg:text-xl leading-relaxed mb-4 sm:mb-6 font-medium">
                   {currentTestimonial.quote}
                 </blockquote>
-
-                {/* Highlight Badge */}
-                <div className="inline-flex items-center gap-2 bg-[color:var(--shaddai-yellow)] text-gray-800 px-6 py-3 rounded-full text-lg font-bold shadow-lg">
-                  <Star className="w-5 h-5" />
-                  {currentTestimonial.highlight}
-                </div>
               </div>
             </div>
           </div>
 
           {/* Dots Indicator */}
-          <div className="flex justify-center gap-4 mt-8">
+          <div className="flex justify-center gap-2 sm:gap-3 mt-6 sm:mt-8">
             {testimonials.map((_, index) => (
               <button
                 key={index}
                 onClick={() => goTo(index)}
-                className={`w-4 h-4 rounded-full transition-all duration-300 ${
-                  index === current ? "bg-[color:var(--shaddai-green)] scale-125" : "bg-gray-300 hover:bg-gray-400"
+                className={`w-2 h-2 sm:w-3 sm:h-3 rounded-full transition-all duration-300 ${
+                  index === current ? "bg-[#1d7748] scale-125" : "bg-gray-300 hover:bg-gray-400"
                 }`}
               />
             ))}
           </div>
         </div>
 
-        {/* Fun Stats Section */}
-        <div className="grid grid-cols-2 lg:grid-cols-4  text-black gap-6 mt-16">
+        {/* Stats Section */}
+        <div
+          className={`grid grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6 mt-12 sm:mt-16 transition-all duration-1000 delay-500 ${
+            isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-10"
+          }`}
+        >
           {[
-            { value: "98%", label: "¡Súper Satisfechos!", color: "border-[color:var(--shaddai-green)]" },
-            { value: "150+", label: "Familias Felices", color: "border-[color:var(--shaddai-blue)]" },
-            { value: "5★", label: "¡Súper Rating!", color: "border-[color:var(--shaddai-pink)]" },
-            { value: "15+", label: "Años de Magia", color: "border-[color:var(--shaddai-yellow)]" },
+            { value: "98%", label: "Familias satisfechas", color: "#1d7748" },
+            { value: "150+", label: "Familias felices", color: "#4f75ff" },
+            { value: "5★", label: "Calificación promedio", color: "#ffd44d" },
+            { value: "15+", label: "Años de experiencia", color: "#f68026" },
           ].map((stat, index) => (
             <div
               key={index}
-              className={`text-center bg-white/90 backdrop-blur-sm rounded-2xl p-6 shadow-lg border-4 ${stat.color} transition-all duration-700 ${
-                isVisible ? "opacity-100 translate-y-0 scale-100" : "opacity-0 translate-y-10 scale-90"
-              }`}
-              style={{ transitionDelay: `${800 + index * 100}ms` }}
+              className="text-center bg-white rounded-xl p-4 sm:p-6 shadow-sm border border-gray-100 hover:shadow-md transition-all duration-300 hover:-translate-y-1"
             >
-              <div className="text-4xl font-display font-bold mb-2">{stat.value}</div>
-              <div className="text-gray-600 font-medium">{stat.label}</div>
+              <div className="text-2xl sm:text-3xl font-bold mb-2" style={{ color: stat.color }}>
+                {stat.value}
+              </div>
+              <div className="text-gray-600 font-medium text-sm sm:text-base">{stat.label}</div>
             </div>
           ))}
         </div>

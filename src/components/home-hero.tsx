@@ -3,12 +3,13 @@
 import { useState, useEffect } from "react"
 import Link from "next/link"
 import { Button } from "@/components/ui/button"
-import { GraduationCap, Heart, BookOpen, ArrowRight } from "lucide-react"
+import { GraduationCap, Heart, BookOpen, ArrowRight, ChevronLeft, ChevronRight } from "lucide-react"
 
 const heroSlides = [
   {
     id: 1,
     programName: "SHADDAI SCHOOL",
+    subtitle: "Educación integral para el futuro",
     backgroundImage: "/images/hero-1.webp",
     icon: GraduationCap,
     primaryColor: "blue",
@@ -18,6 +19,7 @@ const heroSlides = [
   {
     id: 2,
     programName: "SHADDAI DAY-CARE",
+    subtitle: "Cuidado profesional con amor",
     backgroundImage: "/images/hero-2.webp",
     icon: Heart,
     primaryColor: "green",
@@ -26,6 +28,7 @@ const heroSlides = [
   {
     id: 3,
     programName: "GRACE LEARNING CENTER",
+    subtitle: "Aprendizaje creativo y divertido",
     backgroundImage: "/images/hero-3.webp",
     icon: BookOpen,
     primaryColor: "orange",
@@ -35,81 +38,192 @@ const heroSlides = [
 
 export default function HeroCarousel() {
   const [currentSlide, setCurrentSlide] = useState(0)
+  const [imagesLoaded, setImagesLoaded] = useState(false)
+  const [isAnimating, setIsAnimating] = useState(false)
 
   useEffect(() => {
-    const interval = setInterval(() => {
-      setCurrentSlide((prev) => (prev + 1) % heroSlides.length)
-    }, 6000)
-    return () => clearInterval(interval)
+    const preloadImages = async () => {
+      const imagePromises = heroSlides.map((slide) => {
+        return new Promise((resolve, reject) => {
+          const img = new Image()
+          img.crossOrigin = "anonymous"
+          img.onload = resolve
+          img.onerror = reject
+          img.src = slide.backgroundImage
+        })
+      })
+
+      try {
+        await Promise.all(imagePromises)
+        setImagesLoaded(true)
+      } catch (error) {
+        console.error("Error preloading images:", error)
+        setImagesLoaded(true)
+      }
+    }
+
+    preloadImages()
   }, [])
 
   const currentHero = heroSlides[currentSlide]
 
+  const goToPrevious = () => {
+    if (isAnimating) return
+    setIsAnimating(true)
+    setCurrentSlide((prev) => (prev - 1 + heroSlides.length) % heroSlides.length)
+    setTimeout(() => setIsAnimating(false), 1000)
+  }
+
+  const goToNext = () => {
+    if (isAnimating) return
+    setIsAnimating(true)
+    setCurrentSlide((prev) => (prev + 1) % heroSlides.length)
+    setTimeout(() => setIsAnimating(false), 1000)
+  }
+
   const getColorClasses = (color: string) => {
     switch (color) {
       case "blue":
-        return "from-blue-600 to-blue-800 hover:from-blue-700 hover:to-blue-900"
+        return "bg-[#4f75ff] hover:bg-[#4f75ff]/90"
       case "green":
-        return "from-green-600 to-green-800 hover:from-green-700 hover:to-green-900"
+        return "bg-[#1d7748] hover:bg-[#1d7748]/90"
       case "orange":
-        return "from-orange-600 to-orange-800 hover:from-orange-700 hover:to-orange-900"
+        return "bg-[#f68026] hover:bg-[#f68026]/90"
       default:
-        return "from-green-600 to-green-800 hover:from-green-700 hover:to-green-900"
+        return "bg-[#1d7748] hover:bg-[#1d7748]/90"
+    }
+  }
+
+  const getAccentColor = (color: string) => {
+    switch (color) {
+      case "blue":
+        return "#4f75ff"
+      case "green":
+        return "#1d7748"
+      case "orange":
+        return "#f68026"
+      default:
+        return "#1d7748"
     }
   }
 
   return (
-    <section className="relative h-screen overflow-hidden">
-      {/* Background Image */}
-      <div
-        className="absolute inset-0 bg-cover bg-center transition-all duration-1000 ease-out"
-        style={{
-          backgroundImage: `url('${currentHero.backgroundImage}')`,
-          backgroundPosition: "center 35%",
-          backgroundSize: "cover",
-        }}
-      />
+    <section className="relative h-screen overflow-hidden bg-white">
+      {/* Distinctive Element - Floating Geometric Shapes */}
+      <div className="absolute inset-0 pointer-events-none overflow-hidden">
+        <div className="absolute top-20 right-10 w-32 h-32 bg-[#fcafc2]/10 rounded-full animate-pulse"></div>
+        <div
+          className="absolute bottom-32 left-16 w-24 h-24 bg-[#4f75ff]/10 rounded-full animate-bounce"
+          style={{ animationDuration: "3s" }}
+        ></div>
+        <div
+          className="absolute top-1/3 right-1/4 w-16 h-16 bg-[#ffd44d]/20 rotate-45 animate-spin"
+          style={{ animationDuration: "8s" }}
+        ></div>
+      </div>
 
-      {/* Minimal Overlay for Text Readability */}
-      <div className="absolute inset-0 bg-gradient-to-b from-black/40 via-black/20 to-black/50" />
+      {/* Background Images */}
+      {heroSlides.map((slide, index) => (
+        <div
+          key={slide.id}
+          className={`absolute inset-0 transition-all duration-1000 ease-out ${
+            index === currentSlide ? "opacity-100 scale-100" : "opacity-0 scale-105"
+          }`}
+        >
+          <div
+            className="absolute inset-0 bg-cover bg-center transition-transform duration-1000"
+            style={{
+              backgroundImage: `url('${slide.backgroundImage}')`,
+              backgroundPosition: "center 35%",
+              backgroundSize: "cover",
+            }}
+          />
+          <div className="absolute inset-0 bg-black/20" />
+        </div>
+      ))}
+
+      {/* Loading indicator */}
+      {!imagesLoaded && (
+        <div className="absolute inset-0 bg-white flex items-center justify-center z-50">
+          <div className="text-gray-600 text-center animate-fade-in">
+            <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-[#1d7748] mx-auto mb-4"></div>
+            <p className="text-lg font-medium">Cargando experiencia...</p>
+          </div>
+        </div>
+      )}
+
+      {/* Navigation Arrows */}
+      <button
+        onClick={goToPrevious}
+        disabled={!imagesLoaded || isAnimating}
+        className="absolute left-4 top-1/2 transform -translate-y-1/2 z-20
+             bg-white/20 hover:bg-white/40 backdrop-blur-sm rounded-full p-2 sm:p-3
+             text-white transition-all duration-300
+             hover:scale-110 disabled:opacity-50 disabled:cursor-not-allowed
+             animate-fade-in border border-white/30"
+        aria-label="Slide anterior"
+      >
+        <ChevronLeft className="w-4 h-4 sm:w-5 sm:h-5" />
+      </button>
+
+      <button
+        onClick={goToNext}
+        disabled={!imagesLoaded || isAnimating}
+        className="absolute right-4 top-1/2 transform -translate-y-1/2 z-20
+             bg-white/20 hover:bg-white/40 backdrop-blur-sm rounded-full p-2 sm:p-3
+             text-white transition-all duration-300
+             hover:scale-110 disabled:opacity-50 disabled:cursor-not-allowed
+             animate-fade-in border border-white/30"
+        aria-label="Siguiente slide"
+      >
+        <ChevronRight className="w-4 h-4 sm:w-5 sm:h-5" />
+      </button>
 
       {/* Content */}
-      <div className="relative z-10 h-full flex items-center justify-center">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full text-center">
-          {/* Program Title */}
-          <div className="mb-8 sm:mb-12">
+      <div className="relative z-10 h-full flex items-center">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full">
+          <div className="max-w-xl lg:max-w-2xl px-4 sm:px-0">
             {/* New Launch Badge */}
             {currentHero.isNew && (
-              <div className="mb-4 sm:mb-6">
-                <span className="inline-flex items-center px-3 py-1 sm:px-4 sm:py-2 rounded-full text-xs sm:text-sm font-bold bg-gradient-to-r from-yellow-400 to-orange-500 text-white shadow-lg animate-pulse border-2 border-white/30 backdrop-blur-sm">
+              <div className="mb-4 sm:mb-6 animate-fade-in-up" style={{ animationDelay: "0.2s" }}>
+                <span
+                  className="inline-flex items-center px-3 py-2 sm:px-4 sm:py-2 rounded-full text-xs sm:text-sm font-medium text-white shadow-sm animate-pulse"
+                  style={{ backgroundColor: getAccentColor(currentHero.primaryColor) }}
+                >
                   <span className="w-2 h-2 bg-white rounded-full mr-2 animate-ping"></span>
-                  NUEVO LANZAMIENTO
+                  Nuevo programa
                 </span>
               </div>
             )}
 
-            <h1 className="text-3xl xs:text-4xl sm:text-5xl md:text-6xl lg:text-7xl xl:text-8xl 2xl:text-9xl font-black text-white leading-[0.85] tracking-tighter drop-shadow-2xl mb-6 sm:mb-8 px-2">
-              <span className="block bg-gradient-to-r from-white via-white to-gray-100 bg-clip-text text-transparent">
-                {currentHero.programName}
-              </span>
+            {/* Program Title */}
+            <h1
+              className="text-2xl sm:text-3xl md:text-5xl lg:text-6xl font-bold text-white leading-tight mb-3 sm:mb-4 animate-fade-in-up"
+              style={{ animationDelay: "0.4s" }}
+            >
+              {currentHero.programName}
             </h1>
 
-            {/* Single CTA Button - Responsive */}
-            <div className="px-4 sm:px-0">
+            {/* Subtitle */}
+            <p
+              className="text-base sm:text-lg md:text-xl text-white/90 mb-6 sm:mb-8 font-light animate-fade-in-up"
+              style={{ animationDelay: "0.6s" }}
+            >
+              {currentHero.subtitle}
+            </p>
+
+            {/* CTA Button */}
+            <div className="animate-fade-in-up" style={{ animationDelay: "0.8s" }}>
               <Link href={currentHero.link}>
                 <Button
                   size="lg"
-                  className={`bg-gradient-to-r ${getColorClasses(currentHero.primaryColor)} text-white cursor-pointer 
-                    px-6 py-3 sm:px-8 sm:py-4 md:px-10 md:py-5 lg:px-12 lg:py-6 
-                    text-sm sm:text-base md:text-lg lg:text-xl 
-                    font-bold rounded-full shadow-2xl hover:shadow-3xl 
-                    transition-all duration-500 transform hover:scale-105 hover:-translate-y-2 
-                    group border-2 border-white/20 backdrop-blur-sm
-                    w-full max-w-xs sm:max-w-sm md:max-w-md lg:max-w-none lg:w-auto
-                    min-h-[48px] sm:min-h-[52px] md:min-h-[56px] lg:min-h-[60px]`}
+                  className={`${getColorClasses(currentHero.primaryColor)} text-white font-medium
+                             px-6 py-3 sm:px-8 sm:py-4 text-base sm:text-lg rounded-lg shadow-lg
+                             transition-all duration-300 hover:shadow-xl hover:scale-105
+                             flex items-center gap-2 sm:gap-3 w-fit group`}
                 >
-                  <span className="mr-2 sm:mr-3 md:mr-4 whitespace-nowrap">CONOCER PROGRAMA</span>
-                  <ArrowRight className="w-4 h-4 sm:w-5 sm:h-5 md:w-6 md:h-6 group-hover:translate-x-2 transition-transform duration-300 flex-shrink-0" />
+                  Conocer programa
+                  <ArrowRight className="w-4 h-4 sm:w-5 sm:h-5 group-hover:translate-x-1 transition-transform" />
                 </Button>
               </Link>
             </div>
@@ -117,17 +231,27 @@ export default function HeroCarousel() {
         </div>
       </div>
 
-      {/* Progress Indicators - Responsive */}
-      <div className="absolute bottom-4 sm:bottom-6 md:bottom-8 left-1/2 transform -translate-x-1/2">
-        <div className="flex space-x-2 sm:space-x-3 bg-black/30 backdrop-blur-sm rounded-full px-3 py-2 sm:px-4">
+      {/* Progress Indicators */}
+      <div
+        className="absolute bottom-6 sm:bottom-8 left-1/2 transform -translate-x-1/2 z-20 animate-fade-in"
+        style={{ animationDelay: "1s" }}
+      >
+        <div className="flex space-x-2 sm:space-x-3">
           {heroSlides.map((_, index) => (
             <button
               key={index}
-              className={`h-2 sm:h-3 rounded-full transition-all duration-500 cursor-pointer ${
-                index === currentSlide ? "bg-white w-6 sm:w-8 shadow-lg" : "bg-white/40 w-2 sm:w-3 hover:bg-white/60"
+              disabled={!imagesLoaded || isAnimating}
+              className={`h-1.5 sm:h-2 rounded-full transition-all duration-300 cursor-pointer disabled:cursor-not-allowed ${
+                index === currentSlide ? "bg-white w-6 sm:w-8 shadow-sm" : "bg-white/40 w-1.5 sm:w-2 hover:bg-white/60"
               }`}
-              onClick={() => setCurrentSlide(index)}
-              aria-label={`Go to slide ${index + 1}`}
+              onClick={() => {
+                if (!isAnimating) {
+                  setIsAnimating(true)
+                  setCurrentSlide(index)
+                  setTimeout(() => setIsAnimating(false), 1000)
+                }
+              }}
+              aria-label={`Ir al slide ${index + 1}`}
             />
           ))}
         </div>

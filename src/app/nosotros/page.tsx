@@ -24,9 +24,9 @@ export default function NosotrosPage() {
 
   const teamMembers = [
     {
-      name: "María Elena Rodríguez",
-      role: "Directora General",
-      experience: "15 años",
+      name: "John Isaias",
+      role: " General",
+      experience: "25 años",
       image: "/placeholder.svg?height=300&width=300",
       description: "Especialista en educación infantil con maestría en desarrollo temprano.",
     },

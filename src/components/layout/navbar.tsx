@@ -30,7 +30,7 @@ export default function Navbar() {
             <div className="relative">
               <div className="w-16 h-16 bg-white/10 rounded-2xl flex items-center justify-center shadow-lg border border-white/20">
               <Image
-                src="/images/logotipo.png"
+                src="/images/logo.png"
                 alt="Shaddai Day-Care Logo"
                 width={48}
                 height={48}
