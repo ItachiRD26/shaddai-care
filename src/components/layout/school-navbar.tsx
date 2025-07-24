@@ -6,11 +6,11 @@ import { Menu, X, GraduationCap } from "lucide-react"
 import { Button } from "@/components/ui/button"
 
 const links = [
-  { name: "Inicio", href: "/shaddai-school" },
-  { name: "Nosotros", href: "/shaddai-school#nosotros" },
-  { name: "Programa", href: "/shaddai-school#programa" },
-  { name: "Admisiones", href: "/shaddai-school#admisiones" },
-  { name: "Contacto", href: "/shaddai-school#contacto" },
+  { name: "Inicio", href: "#inicio" },
+  { name: "Nosotros", href: "#nosotros" },
+  { name: "Programa", href: "#programa" },
+  { name: "Admisiones", href: "#admisiones" },
+  { name: "Contacto", href: "#contacto" },
 ]
 
 export default function SchoolNavbar() {
@@ -36,7 +36,7 @@ export default function SchoolNavbar() {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between h-20">
           {/* Professional Logo */}
-          <Link href="/shaddai-school" className="flex items-center gap-3 group">
+          <Link href="#inicio" className="flex items-center gap-3 group">
             <div className="w-10 h-10 bg-blue-700 rounded-lg flex items-center justify-center group-hover:bg-blue-800 transition-colors">
               <GraduationCap className="w-6 h-6 text-white" />
             </div>
@@ -66,7 +66,7 @@ export default function SchoolNavbar() {
               className="hidden md:inline-flex bg-blue-700 hover:bg-blue-800 text-white font-medium"
               size="sm"
             >
-              <Link href="/shaddai-school#admisiones">Admisiones</Link>
+              <Link href="#admisiones">Admisiones</Link>
             </Button>
 
             {/* Mobile menu button */}
@@ -97,7 +97,7 @@ export default function SchoolNavbar() {
             ))}
             <div className="pt-4 border-t border-slate-200 mt-4">
               <Button asChild className="w-full bg-blue-700 hover:bg-blue-800 text-white font-medium">
-                <Link href="/shaddai-school#admisiones" onClick={() => setIsOpen(false)}>
+                <Link href="#admisiones" onClick={() => setIsOpen(false)}>
                   Proceso de Admisión
                 </Link>
               </Button>

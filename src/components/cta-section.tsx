@@ -71,7 +71,7 @@ export default function CtaSection() {
             }`}
           >
             <Link href="/contacto">
-              <Button className="bg-[#1d7748] hover:bg-[#1d7748]/90 text-white font-medium px-6 sm:px-8 py-3 sm:py-4 rounded-lg text-base sm:text-lg flex items-center gap-2 sm:gap-3 group shadow-sm hover:shadow-md transition-all duration-300 hover:scale-105 w-full sm:w-auto justify-center">
+              <Button className="cursor-pointer bg-[#1d7748] hover:bg-[#1d7748]/90 text-white font-medium px-6 sm:px-8 py-3 sm:py-4 rounded-lg text-base sm:text-lg flex items-center gap-2 sm:gap-3 group shadow-sm hover:shadow-md transition-all duration-300 hover:scale-105 w-full sm:w-auto justify-center">
                 <Calendar className="w-4 h-4 sm:w-5 sm:h-5" />
                 Agendar visita
                 <ArrowRight className="w-4 h-4 sm:w-5 sm:h-5 group-hover:translate-x-1 transition-transform" />
@@ -79,7 +79,7 @@ export default function CtaSection() {
             </Link>
 
             <Link href="tel:+1234567890">
-              <Button className="bg-[#4f75ff] hover:bg-[#4f75ff]/90 text-white font-medium px-6 sm:px-8 py-3 sm:py-4 rounded-lg text-base sm:text-lg flex items-center gap-2 sm:gap-3 shadow-sm hover:shadow-md transition-all duration-300 hover:scale-105 w-full sm:w-auto justify-center">
+              <Button className="cursor-pointer bg-[#4f75ff] hover:bg-[#4f75ff]/90 text-white font-medium px-6 sm:px-8 py-3 sm:py-4 rounded-lg text-base sm:text-lg flex items-center gap-2 sm:gap-3 shadow-sm hover:shadow-md transition-all duration-300 hover:scale-105 w-full sm:w-auto justify-center">
                 <Phone className="w-4 h-4 sm:w-5 sm:h-5" />
                 Llamar ahora
               </Button>

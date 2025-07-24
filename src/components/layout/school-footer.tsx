@@ -1,110 +1,108 @@
 "use client"
 
 import Link from "next/link"
-import { GraduationCap, Phone, Mail, MapPin, Award } from "lucide-react"
+import { GraduationCap, Phone, Mail, MapPin, Award, Shield } from "lucide-react"
 
 export default function SchoolFooter() {
   return (
-    <footer className="bg-slate-50 border-t border-slate-200">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
-        <div className="grid grid-cols-1 md:grid-cols-4 gap-12">
-          {/* Professional Brand Section */}
-          <div className="md:col-span-2">
-            <Link href="/shaddai-school" className="flex items-center gap-3 mb-6">
-              <div className="w-12 h-12 bg-blue-700 rounded-xl flex items-center justify-center">
-                <GraduationCap className="w-7 h-7 text-white" />
+<footer className="bg-neutral-900 text-white py-16">
+        <div className="max-w-7xl mx-auto px-6">
+          <div className="grid grid-cols-1 md:grid-cols-4 gap-8 mb-12">
+            {/* Logo and Description */}
+            <div className="md:col-span-2 space-y-6">
+              <div className="flex items-center space-x-3">
+                <div className="w-10 h-10 bg-gradient-to-br from-blue-600 to-blue-800 rounded-lg flex items-center justify-center">
+                  <GraduationCap className="w-6 h-6 text-white" />
+                </div>
+                <span className="text-2xl font-bold">SHADDAI SCHOOL</span>
               </div>
-              <div className="flex flex-col">
-                <span className="text-2xl font-bold text-slate-800">SHADDAI</span>
-                <span className="text-lg font-semibold text-blue-700 -mt-1">SCHOOL</span>
+              <p className="text-neutral-400 leading-relaxed max-w-md">
+                Educación bilingüe, cristiana y de excelencia. Formando líderes del mañana con valores sólidos y
+                preparación académica integral.
+              </p>
+              <div className="flex items-center gap-4">
+                <div className="flex items-center gap-2">
+                  <Award className="w-4 h-4 text-blue-400" />
+                  <span className="text-sm text-neutral-400">Institución Certificada</span>
+                </div>
+                <div className="flex items-center gap-2">
+                  <Shield className="w-4 h-4 text-green-400" />
+                  <span className="text-sm text-neutral-400">Campus Seguro</span>
+                </div>
               </div>
-            </Link>
-
-            <p className="text-slate-600 leading-relaxed max-w-md mb-6">
-              Institución educativa de excelencia académica comprometida con la formación integral, educación bilingüe
-              de calidad internacional y sólidos valores cristianos.
-            </p>
-
-            <div className="inline-flex items-center gap-2 bg-blue-50 text-blue-700 px-4 py-2 rounded-full text-sm font-medium border border-blue-200">
-              <Award className="w-4 h-4" />
-              Acreditación Educativa Internacional
             </div>
-          </div>
 
-          {/* Navigation Links */}
-          <div>
-            <h3 className="text-sm font-semibold text-slate-800 uppercase tracking-wider mb-6">Navegación</h3>
-            <ul className="space-y-4">
-              {[
-                { name: "Nosotros", href: "/shaddai-school#nosotros" },
-                { name: "Programa Académico", href: "/shaddai-school#programa" },
-                { name: "Proceso de Admisión", href: "/shaddai-school#admisiones" },
-                { name: "Testimonios", href: "/shaddai-school#testimonios" },
-                { name: "Contacto", href: "/shaddai-school#contacto" },
-              ].map((link) => (
-                <li key={link.name}>
-                  <Link href={link.href} className="text-slate-600 hover:text-blue-700 transition-colors font-medium">
+            {/* Quick Links */}
+            <div>
+              <h4 className="text-lg font-semibold mb-6">Enlaces Rápidos</h4>
+              <div className="space-y-3">
+                {[
+                  { name: "Inicio", href: "#inicio" },
+                  { name: "Nosotros", href: "#nosotros" },
+                  { name: "Programa", href: "#programa" },
+                  { name: "Instalaciones", href: "#instalaciones" },
+                  { name: "Admisiones", href: "#admisiones" },
+                  { name: "Contacto", href: "#contacto" },
+                ].map((link, index) => (
+                  <Link
+                    key={index}
+                    href={link.href}
+                    className="block text-neutral-400 hover:text-white transition-colors"
+                  >
                     {link.name}
                   </Link>
-                </li>
-              ))}
-            </ul>
-          </div>
+                ))}
+              </div>
+            </div>
 
-          {/* Professional Contact Info */}
-          <div>
-            <h3 className="text-sm font-semibold text-slate-800 uppercase tracking-wider mb-6">
-              Información de Contacto
-            </h3>
-            <ul className="space-y-4">
-              <li className="flex items-start gap-3">
-                <MapPin className="w-5 h-5 text-blue-600 mt-1 flex-shrink-0" />
-                <div>
-                  <p className="text-slate-700 font-medium">Campus Principal</p>
-                  <p className="text-slate-600 text-sm">
+            {/* Contact Info */}
+            <div>
+              <h4 className="text-lg font-semibold mb-6">Contacto</h4>
+              <div className="space-y-4">
+                <div className="flex items-start gap-3">
+                  <MapPin className="w-5 h-5 text-blue-400 mt-0.5 flex-shrink-0" />
+                  <div className="text-sm text-neutral-400">
                     Calle José Antonio Salcedo
                     <br />
                     San Fernando de Montecristi
-                  </p>
+                    <br />
+                    República Dominicana
+                  </div>
                 </div>
-              </li>
-              <li className="flex items-start gap-3">
-                <Mail className="w-5 h-5 text-blue-600 mt-1 flex-shrink-0" />
-                <div>
-                  <p className="text-slate-700 font-medium">Correo Institucional</p>
+                <div className="flex items-center gap-3">
+                  <Phone className="w-5 h-5 text-green-400 flex-shrink-0" />
+                  <a href="tel:+18090000000" className="text-sm text-neutral-400 hover:text-white transition-colors">
+                    (809) 000-0000
+                  </a>
+                </div>
+                <div className="flex items-center gap-3">
+                  <Mail className="w-5 h-5 text-purple-400 flex-shrink-0" />
                   <a
-                    href="mailto:contacto@shaddaischool.edu.do"
-                    className="text-slate-600 hover:text-blue-700 transition-colors text-sm"
+                    href="mailto:admisiones@shaddaischool.edu.do"
+                    className="text-sm text-neutral-400 hover:text-white transition-colors"
                   >
-                    contacto@shaddaischool.edu.do
+                    admisiones@shaddaischool.edu.do
                   </a>
                 </div>
-              </li>
-              <li className="flex items-start gap-3">
-                <Phone className="w-5 h-5 text-blue-600 mt-1 flex-shrink-0" />
-                <div>
-                  <p className="text-slate-700 font-medium">Teléfono</p>
-                  <a href="tel:+18091234567" className="text-slate-600 hover:text-blue-700 transition-colors text-sm">
-                    (809) 123-4567
-                  </a>
-                </div>
-              </li>
-            </ul>
+              </div>
+            </div>
           </div>
-        </div>
 
-        {/* Professional Bottom Bar */}
-        <div className="border-t border-slate-200 mt-12 pt-8 flex flex-col sm:flex-row justify-between items-center">
-          <p className="text-sm text-slate-500 text-center sm:text-left">
-            © {new Date().getFullYear()} Shaddai School. Todos los derechos reservados.
-          </p>
-          <div className="flex items-center gap-6 mt-4 sm:mt-0">
-            <p className="text-sm text-slate-500">Institución Educativa Certificada</p>
-            <div className="w-2 h-2 bg-blue-600 rounded-full"></div>
-            <p className="text-sm text-slate-500">Estándares Internacionales</p>
+          {/* Bottom Bar */}
+          <div className="border-t border-neutral-800 pt-8">
+            <div className="flex flex-col md:flex-row justify-between items-center gap-4">
+              <div className="text-sm text-neutral-400">© 2024 Shaddai School. Todos los derechos reservados.</div>
+              <div className="flex items-center gap-6">
+                <Link href="#" className="text-sm text-neutral-400 hover:text-white transition-colors">
+                  Política de Privacidad
+                </Link>
+                <Link href="#" className="text-sm text-neutral-400 hover:text-white transition-colors">
+                  Términos de Uso
+                </Link>
+              </div>
+            </div>
           </div>
         </div>
-      </div>
-    </footer>
+      </footer>
   )
 }

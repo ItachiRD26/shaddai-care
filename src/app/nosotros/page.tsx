@@ -226,7 +226,7 @@ export default function NosotrosPage() {
             Ven y descubre por qué somos la mejor opción para tu pequeño tesoro
           </p>
           <Link href="/contacto">
-            <Button className="bg-white text-[color:var(--shaddai-green)] hover:bg-gray-100 font-bold px-10 py-4 rounded-2xl text-xl shadow-lg">
+            <Button className="cursor-pointer bg-white text-[color:var(--shaddai-green)] hover:bg-gray-100 font-bold px-10 py-4 rounded-2xl text-xl shadow-lg">
               ¡Agenda tu Visita! <ArrowRight className="w-6 h-6 ml-2" />
             </Button>
           </Link>

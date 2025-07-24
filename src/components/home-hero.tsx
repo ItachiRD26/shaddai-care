@@ -217,7 +217,7 @@ export default function HeroCarousel() {
               <Link href={currentHero.link}>
                 <Button
                   size="lg"
-                  className={`${getColorClasses(currentHero.primaryColor)} text-white font-medium
+                  className={`${getColorClasses(currentHero.primaryColor)} text-white cursor-pointer font-medium
                              px-6 py-3 sm:px-8 sm:py-4 text-base sm:text-lg rounded-lg shadow-lg
                              transition-all duration-300 hover:shadow-xl hover:scale-105
                              flex items-center gap-2 sm:gap-3 w-fit group`}

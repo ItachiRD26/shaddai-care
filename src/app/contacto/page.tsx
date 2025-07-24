@@ -275,11 +275,11 @@ export default function ContactoPage() {
                   Acciones Rápidas ⚡
                 </h3>
                 <div className="space-y-4">
-                  <Button className="w-full bg-green-500 hover:bg-green-600 text-white font-bold py-3 rounded-xl flex items-center justify-center gap-2">
+                  <Button className=" cursor-pointer w-full bg-green-500 hover:bg-green-600 text-white font-bold py-3 rounded-xl flex items-center justify-center gap-2">
                     <Phone className="w-5 h-5" />
                     Llamar Ahora
                   </Button>
-                  <Button className="w-full bg-blue-500 hover:bg-blue-600 text-white font-bold py-3 rounded-xl flex items-center justify-center gap-2">
+                  <Button className=" cursor-pointer w-full bg-blue-500 hover:bg-blue-600 text-white font-bold py-3 rounded-xl flex items-center justify-center gap-2">
                     <MessageCircle className="w-5 h-5" />
                     Chat WhatsApp
                   </Button>
@@ -326,10 +326,10 @@ export default function ContactoPage() {
             Da el primer paso hacia la mejor experiencia educativa para tu pequeño
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            <Button className="bg-white text-[color:var(--shaddai-orange)] hover:bg-gray-100 font-bold px-8 py-4 rounded-2xl text-lg">
+            <Button className="cursor-pointer bg-white text-[color:var(--shaddai-orange)] hover:bg-gray-100 font-bold px-8 py-4 rounded-2xl text-lg">
               <Calendar className="w-6 h-6 mr-2" /> Agendar Visita
             </Button>
-            <Button className="bg-white/20 text-white hover:bg-white/30 font-bold px-8 py-4 rounded-2xl text-lg border border-white/30">
+            <Button className="cursor-pointer bg-white/20 text-white hover:bg-white/30 font-bold px-8 py-4 rounded-2xl text-lg border border-white/30">
               <Phone className="w-6 h-6 mr-2" /> Llamar Ahora
             </Button>
           </div>

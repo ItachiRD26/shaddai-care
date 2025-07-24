@@ -174,7 +174,7 @@ export default function WhyChooseUs() {
             Ven y descubre por qué somos la mejor opción para tu pequeño
           </p>
           <Link href="/contacto">
-            <Button className="bg-[#1d7748] hover:bg-[#1d7748]/90 text-white font-medium px-6 sm:px-8 py-3 sm:py-4 rounded-lg text-base sm:text-lg shadow-sm hover:shadow-md transition-all duration-300 hover:scale-105">
+            <Button className="bg-[#1d7748] hover:bg-[#1d7748]/90 cursor-pointer text-white font-medium px-6 sm:px-8 py-3 sm:py-4 rounded-lg text-base sm:text-lg shadow-sm hover:shadow-md transition-all duration-300 hover:scale-105">
               Agendar visita
             </Button>
           </Link>

@@ -3,7 +3,7 @@
 import { useState, useEffect } from "react"
 import Link from "next/link"
 import { Button } from "@/components/ui/button"
-import { Menu, X, Heart } from "lucide-react"
+import { Menu, X } from "lucide-react"
 import Image from "next/image"
 
 export default function Navbar() {
@@ -32,13 +32,10 @@ export default function Navbar() {
               <Image
                 src="/images/logo.png"
                 alt="Shaddai Day-Care Logo"
-                width={48}
-                height={48}
-                className="w-12 h-12 object-contain"
+                width={252}
+                height={252}
+                className="w-252 h-252 object-contain"
               />
-              </div>
-              <div className="absolute -top-1 -right-1 w-6 h-6 bg-pink-500 rounded-full flex items-center justify-center shadow-lg">
-                <Heart className="w-3 h-3 text-white fill-current" />
               </div>
             </div>
             <div className="flex flex-col">
@@ -52,7 +49,7 @@ export default function Navbar() {
           </Link>
 
           <div className="hidden lg:flex items-center space-x-8">
-            {["INICIO", "NOSOTROS", "PROGRAMAS", "INSCRIPCIONES", "GALERIA", "CONTACTO"].map((name) => (
+            {["NOSOTROS", "PROGRAMAS", "INSCRIPCIONES", "GALERIA", "CONTACTO"].map((name) => (
               <Link
                 key={name}
                 href={`/${name.toLowerCase() === "inicio" ? "" : name.toLowerCase()}`}
@@ -114,7 +111,7 @@ export default function Navbar() {
         <div className="lg:hidden bg-black/60 backdrop-blur-md border-t border-white/10 shadow-xl">
           <div className="px-6 pt-6 pb-8 space-y-5">
             <nav className="flex flex-col space-y-3 text-white text-lg font-medium tracking-wide">
-              {["INICIO", "NOSOTROS", "PROGRAMAS", "INSCRIPCIONES", "GALERIA", "CONTACTO"].map((name) => (
+              {["NOSOTROS", "PROGRAMAS", "INSCRIPCIONES", "GALERIA", "CONTACTO"].map((name) => (
                 <Link
                   key={name}
                   href={`/${name.toLowerCase() === "inicio" ? "" : name.toLowerCase()}`}
