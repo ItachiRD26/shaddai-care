@@ -1,5 +1,6 @@
 "use client"
 
+import { generarRequisitosPdf } from "@/utils/generaterequisitospdf"
 import { useEffect, useRef, useState } from "react"
 import Image from "next/image"
 import Link from "next/link"
@@ -33,21 +34,21 @@ import WaitlistModal from "@/components/waitlist-modal"
 const testimonials = [
   {
     name: "Familia García",
-    avatar: "/images/familias-1.jpeg",
+    avatar: "/images/familias-1.webp",
     text: "Lo que más me gusta es el ambiente cálido y familiar que se siente desde el primer día. Se nota que el personal está comprometido con el bienestar y desarrollo de los niños, y me da mucha tranquilidad saber que mi hijo está en buenas manos. Además, valoro mucho las actividades lúdicas y educativas que fomentan su creatividad y aprendizaje.",
     rating: 5,
     role: "Padres de estudiante de Kinder",
   },
   {
     name: "Familia Rodríguez",
-    avatar: "/images/familias-2.jpeg",
+    avatar: "/images/familias-2.webp",
     text: "El enfoque humano y cristiano de SHADDAI SCHOOL nos conquistó. Aquí los niños aprenden, se sienten amados y crecen con propósito.",
     rating: 5,
     role: "Padres de estudiante de Pre-K",
   },
   {
     name: "Familia Martínez",
-    avatar: "/images/familias-3.jpeg",
+    avatar: "/images/familias-3.webp",
     text: "La preparación académica es excepcional. Mi hijo llegó al primer grado con ventajas notables en inglés y matemáticas.",
     rating: 5,
     role: "Padres de egresado",
@@ -75,25 +76,25 @@ const facilities = [
   {
     name: "Aulas Modernas",
     description: "Espacios amplios, luminosos y equipados con tecnología educativa",
-    image: "/images/aula.jpeg",
+    image: "/images/aula-3.webp",
     icon: Building,
   },
   {
     name: "Laboratorio de Ciencias",
     description: "Espacio para exploración científica adaptado para preescolar",
-    image: "/images/science-lab.jpg",
+    image: "/images/aula-2.webp",
     icon: Microscope,
   },
   {
     name: "Estudio de Arte",
     description: "Taller creativo para desarrollo artístico y expresión",
-    image: "/images/art-studio.jpg",
+    image: "/images/aula-5.webp",
     icon: Palette,
   },
   {
     name: "Sala de Música",
     description: "Espacio acústico para educación musical y expresión corporal",
-    image: "/images/music-room.jpg",
+    image: "/images/aula-4.webp",
     icon: Music,
   },
 ]
@@ -233,7 +234,7 @@ export default function ShaddaiSchoolPage() {
         {/* Background Image */}
         <div className="absolute inset-0 z-0">
           <Image
-            src="/images/hero-school-2.jpeg"
+            src="/images/hero-school-2.webp"
             alt="Campus de Shaddai School"
             fill
             className="object-cover scale-105"
@@ -289,7 +290,7 @@ export default function ShaddaiSchoolPage() {
               <span className="text-orange-600">con nosotros</span>
             </h2>
             <p className="text-lg sm:text-xl text-orange-700 max-w-3xl mx-auto leading-relaxed">
-              Ya está disponible nuestra Lista de Espera para Kinder (4 años). Este proceso le permite manifestar su
+              Ya está disponible nuestra Lista de Espera. Este proceso le permite manifestar su
               interés y recibir atención personalizada del equipo académico.
             </p>
           </div>
@@ -311,7 +312,7 @@ export default function ShaddaiSchoolPage() {
 
                 <div className="space-y-4 mb-8">
                   {[
-                    { icon: Users, text: "Cupos limitados para el grado Kinder (4 años)" },
+                    { icon: Users, text: "Cupos limitados" },
                     { icon: Heart, text: "Atención personalizada en cada etapa" },
                     { icon: Shield, text: "Proceso de admisión transparente y profesional" },
                   ].map((item, index) => (
@@ -369,12 +370,12 @@ export default function ShaddaiSchoolPage() {
               </div>
 
               <Button
-                onClick={openModal}
-                className="w-full bg-orange-600 hover:bg-orange-700 text-white px-8 py-4 rounded-full font-semibold text-lg transform hover:scale-105 transition-all duration-300 cursor-pointer"
-              >
-                <Download className="w-5 h-5 mr-2" />
-                Descargar Lista Completa de Requisitos
-              </Button>
+  onClick={generarRequisitosPdf}
+  className="w-full bg-orange-600 hover:bg-orange-700 text-white px-8 py-4 rounded-full font-semibold text-lg transform hover:scale-105 transition-all duration-300 cursor-pointer"
+>
+  <Download className="w-5 h-5 mr-2" />
+  Descargar Lista Completa de Requisitos
+</Button>
             </div>
           </div>
 
@@ -481,7 +482,7 @@ export default function ShaddaiSchoolPage() {
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12 items-center">
               <div className="relative opacity-0 animate-slide-in-left">
                 <div className="aspect-[4/3] relative overflow-hidden rounded-2xl">
-                  <Image src="/images/school.jpg" alt="Aula bilingüe" fill className="object-cover" />
+                  <Image src="/images/aula.webp" alt="Aula bilingüe" fill className="object-cover" />
                 </div>
                 <div className="absolute top-6 right-6 bg-white px-6 py-3 rounded-full shadow-lg animate-float">
                   <div className="flex items-center gap-2">
@@ -573,65 +574,67 @@ export default function ShaddaiSchoolPage() {
 
           {/* Main Facilities */}
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6 lg:gap-8 mb-16 lg:mb-24">
-            {facilities.map((facility, index) => {
-              const IconComponent = facility.icon
-              return (
-                <div key={index} className={`group opacity-0 animate-scale-in stagger-${index + 1}`}>
-                  <div className="relative aspect-[4/3] overflow-hidden rounded-2xl transform hover:scale-105 transition-transform duration-700">
-                    <Image
-                      src="/images/prueba.jpg"
-                      alt={facility.name}
-                      fill
-                      className="object-cover group-hover:scale-110 transition-transform duration-700"
-                    />
-                    <div className="absolute inset-0 bg-gradient-to-t from-orange-800/90 via-transparent to-transparent"></div>
+  {facilities.map((facility, index) => {
+    const IconComponent = facility.icon
+    return (
+      <div key={index} className={`group opacity-0 animate-scale-in stagger-${index + 1}`}>
+        <div className="relative aspect-[4/3] overflow-hidden rounded-2xl transform hover:scale-105 transition-transform duration-700">
+          <Image
+            src={facility.image}
+            alt={facility.name}
+            fill
+            className="object-cover group-hover:scale-110 transition-transform duration-700"
+          />
+          <div className="absolute inset-0 bg-gradient-to-t from-orange-800/90 via-transparent to-transparent"></div>
 
-                    {/* Icon */}
-                    <div className="absolute top-6 right-6 w-14 h-14 bg-white rounded-full flex items-center justify-center shadow-lg animate-float">
-                      <IconComponent className="w-7 h-7 text-orange-600" />
-                    </div>
-
-                    {/* Content */}
-                    <div className="absolute bottom-0 left-0 right-0 p-6 lg:p-8">
-                      <h3 className="text-xl lg:text-2xl font-bold text-white mb-3">{facility.name}</h3>
-                      <p className="text-white/90 leading-relaxed">{facility.description}</p>
-                    </div>
-                  </div>
-                </div>
-              )
-            })}
+          {/* Icon */}
+          <div className="absolute top-6 right-6 w-14 h-14 bg-white rounded-full flex items-center justify-center shadow-lg animate-float">
+            <IconComponent className="w-7 h-7 text-orange-600" />
           </div>
+
+          {/* Content */}
+          <div className="absolute bottom-0 left-0 right-0 p-6 lg:p-8">
+            <h3 className="text-xl lg:text-2xl font-bold text-white mb-3">{facility.name}</h3>
+            <p className="text-white/90 leading-relaxed">{facility.description}</p>
+          </div>
+        </div>
+      </div>
+    )
+  })}
+</div>
+
 
           {/* Campus Gallery */}
-          <div className="mb-16 lg:mb-24 opacity-0 animate-fade-in-up">
-            <div className="text-center mb-16">
-              <h3 className="text-2xl lg:text-3xl font-bold text-white mb-4">Recorrido Virtual por nuestro Campus</h3>
-              <p className="text-lg lg:text-xl text-orange-100 max-w-2xl mx-auto">
-                Explore cada espacio diseñado especialmente para el aprendizaje y desarrollo de nuestros estudiantes.
-              </p>
-            </div>
+<div className="mb-16 lg:mb-24 opacity-0 animate-fade-in-up">
+  <div className="text-center mb-16">
+    <h3 className="text-2xl lg:text-3xl font-bold text-white mb-4">Recorrido Virtual por nuestro Campus</h3>
+    <p className="text-lg lg:text-xl text-orange-100 max-w-2xl mx-auto">
+      Explore cada espacio diseñado especialmente para el aprendizaje y desarrollo de nuestros estudiantes.
+    </p>
+  </div>
 
-            <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-4">
-              {Array.from({ length: 8 }).map((_, index) => (
-                <div
-                  key={index}
-                  className={`group relative aspect-square overflow-hidden rounded-xl opacity-0 animate-scale-in stagger-${index + 1} transform hover:scale-105 transition-transform duration-500`}
-                >
-                  <Image
-                    src="/images/prueba.jpg"
-                    alt={`Instalación ${index + 1}`}
-                    fill
-                    className="object-cover group-hover:scale-110 transition-transform duration-500"
-                  />
-                  <div className="absolute inset-0 bg-black/0 group-hover:bg-black/20 transition-colors duration-300 flex items-end">
-                    <p className="text-white font-medium p-3 text-sm opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-                      Espacio {index + 1}
-                    </p>
-                  </div>
-                </div>
-              ))}
-            </div>
-          </div>
+  <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-4">
+    {Array.from({ length: 8 }).map((_, index) => (
+      <div
+        key={index}
+        className={`group relative aspect-square overflow-hidden rounded-xl opacity-0 animate-scale-in stagger-${index + 1} transform hover:scale-105 transition-transform duration-500`}
+      >
+        <Image
+          src={`/images/aula-${index + 1}.webp`}
+          alt={`Instalación ${index + 1}`}
+          fill
+          className="object-cover group-hover:scale-110 transition-transform duration-500"
+        />
+        <div className="absolute inset-0 bg-black/0 group-hover:bg-black/20 transition-colors duration-300 flex items-end">
+          <p className="text-white font-medium p-3 text-sm opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+            Espacio {index + 1}
+          </p>
+        </div>
+      </div>
+    ))}
+  </div>
+</div>
+
 
           {/* Safety Features */}
           <div className="bg-white/10 backdrop-blur-sm rounded-3xl p-8 lg:p-16 opacity-0 animate-fade-in-up">
@@ -760,7 +763,7 @@ export default function ShaddaiSchoolPage() {
               {[
                 { number: "100%", label: "Familias Satisfechas", icon: Heart },
                 { number: "50+", label: "Estudiantes Graduados", icon: GraduationCap },
-                { number: "1:4", label: "Ratio Maestro-Estudiante", icon: Users },
+                { number: "2:15", label: "Ratio Maestro-Estudiante", icon: Users },
                 { number: "4+", label: "Años de Excelencia", icon: Award },
               ].map((stat, index) => (
                 <div key={index} className={`group opacity-0 animate-scale-in stagger-${index + 1}`}>
@@ -805,21 +808,21 @@ export default function ShaddaiSchoolPage() {
                   title: "Nuestra Ubicación",
                   content: "Calle José Antonio Salcedo\nSan Fernando de Montecristi\nRepública Dominicana",
                   action: "Ver en Google Maps",
-                  link: "https://maps.google.com/?q=Calle+José+Antonio+Salcedo,+San+Fernando+de+Montecristi",
+                  link: "https://maps.app.goo.gl/S4HM9tFNqPAWjFVv6",
                 },
                 {
                   icon: Phone,
                   title: "Teléfono de Contacto",
-                  content: "(809) 000-0000",
+                  content: "+1 (829) 552-5935",
                   action: "Llamar Ahora",
-                  link: "tel:+18090000000",
+                  link: "https://api.whatsapp.com/send/?phone=18295525935&text&type=phone_number&app_absent=0",
                 },
                 {
                   icon: Mail,
                   title: "Correo Electrónico",
-                  content: "admisiones@shaddaischool.edu.do",
+                  content: "Shaddaidaycare@gmail.com",
                   action: "Enviar Email",
-                  link: "mailto:admisiones@shaddaischool.edu.do",
+                  link: "mailto:shaddaidaycare@gmail.com",
                 },
               ].map((item, index) => (
                 <div
@@ -850,7 +853,7 @@ export default function ShaddaiSchoolPage() {
             <div className="relative opacity-0 animate-slide-in-right">
               <div className="aspect-[4/5] relative overflow-hidden rounded-3xl">
                 <Image
-                  src="/images/prueba.jpg"
+                  src="/images/aula-3.webp"
                   alt="Vista aérea del campus de Shaddai School"
                   fill
                   className="object-cover"
@@ -862,18 +865,9 @@ export default function ShaddaiSchoolPage() {
                   <div className="bg-white/95 backdrop-blur-sm rounded-2xl p-6 animate-float">
                     <h4 className="text-xl font-bold text-orange-800 mb-3">Nuestro Campus</h4>
                     <p className="text-orange-700 mb-4">
-                      Instalaciones modernas diseñadas específicamente para el aprendizaje y desarrollo de niños de 4
-                      años.
+                      Instalaciones modernas diseñadas específicamente para el aprendizaje y desarrollo de niños pequeños.
                     </p>
                     <div className="flex items-center gap-4">
-                      <div className="flex items-center gap-2">
-                        <Building className="w-4 h-4 text-orange-600" />
-                        <span className="text-sm text-orange-700">5,000 m²</span>
-                      </div>
-                      <div className="flex items-center gap-2">
-                        <Users className="w-4 h-4 text-orange-600" />
-                        <span className="text-sm text-orange-700">Capacidad 20 estudiantes</span>
-                      </div>
                     </div>
                   </div>
                 </div>
@@ -894,7 +888,7 @@ export default function ShaddaiSchoolPage() {
                 </Button>
               </Link>
               <Link
-                href="https://maps.google.com/?q=Calle+José+Antonio+Salcedo,+San+Fernando+de+Montecristi"
+                href="https://maps.app.goo.gl/S4HM9tFNqPAWjFVv6"
                 target="_blank"
                 className="flex-1"
               >

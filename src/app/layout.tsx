@@ -1,7 +1,6 @@
 import type { Metadata } from "next"
-import { Inter, Baloo_2 } from "next/font/google"
 import "@/app/globals.css"
-import LayoutClient from "@/components/layout/layout-client"
+import { Inter, Baloo_2 } from "next/font/google"
 
 const inter = Inter({ subsets: ["latin"] })
 const baloo2 = Baloo_2({ subsets: ["latin"], variable: "--font-display" })
@@ -16,7 +15,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
   return (
     <html lang="es" className={`${inter.className} ${baloo2.variable}`}>
       <body className="antialiased">
-        <LayoutClient>{children}</LayoutClient>
+        {children}
       </body>
     </html>
   )

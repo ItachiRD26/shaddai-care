@@ -100,7 +100,7 @@ export async function POST(request: NextRequest) {
             </h2>
             
             <p style="color: #374151; font-size: 16px; line-height: 1.6; margin-bottom: 20px;">
-              Hemos recibido exitosamente su solicitud para unirse a nuestra <strong>Lista de Espera (4 años)</strong>. 
+              Hemos recibido exitosamente su solicitud para unirse a nuestra <strong>Lista de Espera</strong>. 
               Su información ha sido registrada y nuestro equipo académico se pondrá en contacto con usted pronto.
             </p>
             

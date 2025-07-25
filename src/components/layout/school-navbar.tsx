@@ -7,14 +7,18 @@ import { Button } from "@/components/ui/button"
 import Image from "next/image"
 
 const links = [
-  { name: "Inicio", href: "#inicio" },
+  { name: "Admisiones", href: "#admisiones" },
   { name: "Programa", href: "#programa" },
   { name: "Instalaciones", href: "#instalaciones" },
-  { name: "Admisiones", href: "#admisiones" },
+  { name: "Testimonios", href: "#testimonios" },
   { name: "Contacto", href: "#contacto" },
 ]
 
-export default function SchoolNavbar() {
+interface SchoolNavbarProps {
+  onOpenModal: () => void
+}
+
+export default function SchoolNavbar({ onOpenModal }: SchoolNavbarProps) {
   const [isOpen, setIsOpen] = useState(false)
   const [isScrolled, setIsScrolled] = useState(false)
 
@@ -25,6 +29,7 @@ export default function SchoolNavbar() {
     window.addEventListener("scroll", handleScroll)
     return () => window.removeEventListener("scroll", handleScroll)
   }, [])
+
 
   return (
     <header
@@ -54,7 +59,7 @@ export default function SchoolNavbar() {
 </Link>
 
 
-          {/* Desktop Navigation */}
+{/* Desktop Navigation */}
           <nav className="hidden md:flex items-center gap-1">
             {links.map((link) => (
               <Link
@@ -70,11 +75,11 @@ export default function SchoolNavbar() {
           {/* Desktop CTA */}
           <div className="flex items-center gap-3">
             <Button
-              asChild
-              className="hidden md:inline-flex bg-white text-orange-500 hover:bg-orange-50 font-semibold"
+              onClick={onOpenModal}
+              className="hidden md:inline-flex bg-white text-orange-500 hover:bg-orange-50 font-semibold cursor-pointer"
               size="sm"
             >
-              <Link href="#admisiones">Aplicar Ahora</Link>
+              Aplicar Ahora
             </Button>
 
             {/* Mobile menu button */}
@@ -104,10 +109,14 @@ export default function SchoolNavbar() {
               </Link>
             ))}
             <div className="pt-4 border-t border-orange-500 mt-4">
-              <Button asChild className="w-full bg-white text-orange-500 hover:bg-orange-50 font-semibold">
-                <Link href="#admisiones" onClick={() => setIsOpen(false)}>
-                  Proceso de Admisión
-                </Link>
+              <Button
+                onClick={() => {
+                  onOpenModal()
+                  setIsOpen(false)
+                }}
+                className="w-full bg-white text-orange-500 hover:bg-orange-50 font-semibold cursor-pointer"
+              >
+                Proceso de Admisión
               </Button>
             </div>
           </nav>

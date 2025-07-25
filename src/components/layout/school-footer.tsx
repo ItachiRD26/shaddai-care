@@ -5,7 +5,7 @@ import { GraduationCap, Phone, Mail, MapPin, Award, Shield } from "lucide-react"
 
 export default function SchoolFooter() {
   return (
-    <footer className="bg-gradient-to-br from-orange-700 via-orange-800 to-orange-900 text-white py-16">
+    <footer data-shaddai-footer className="bg-gradient-to-br from-orange-700 via-orange-800 to-orange-900 text-white py-16">
       <div className="max-w-7xl mx-auto px-6">
         <div className="grid grid-cols-1 md:grid-cols-4 gap-8 mb-12">
           {/* Logo and Description */}

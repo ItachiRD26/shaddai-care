@@ -23,7 +23,7 @@ const reasons = [
     description:
       "Cada niño es único y especial. Creamos experiencias personalizadas que respetan su personalidad, ritmo y desarrollo individual.",
     image: "/images/kinder.jpg",
-    stats: "Ratio 1:4",
+    stats: "Ratio 2:15",
     features: ["Atención individual", "Seguimiento personal", "Cuidado emocional"],
     color: "#fcafc2",
   },
