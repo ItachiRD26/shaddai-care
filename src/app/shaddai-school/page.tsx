@@ -233,13 +233,13 @@ export default function ShaddaiSchoolPage() {
         {/* Background Image */}
         <div className="absolute inset-0 z-0">
           <Image
-            src="/images/school-hero.jpg"
+            src="/images/hero-school-2.jpeg"
             alt="Campus de Shaddai School"
             fill
             className="object-cover scale-105"
             priority
           />
-          <div className="absolute inset-0 bg-gradient-to-r from-orange-800/60 via-orange-700/50 to-orange-600/40"></div>
+          <div className="absolute inset-0 bg-gradient-to-r from-orange-800/40 via-orange-700/35 to-orange-600/25"></div>
         </div>
 
         {/* Content */}

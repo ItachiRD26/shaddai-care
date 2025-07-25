@@ -2,8 +2,9 @@
 
 import { useState, useEffect } from "react"
 import Link from "next/link"
-import { Menu, X, GraduationCap } from "lucide-react"
+import { Menu, X } from "lucide-react"
 import { Button } from "@/components/ui/button"
+import Image from "next/image"
 
 const links = [
   { name: "Inicio", href: "#inicio" },
@@ -37,14 +38,21 @@ export default function SchoolNavbar() {
         <div className="flex items-center justify-between h-20">
           {/* Professional Logo */}
           <Link href="#inicio" className="flex items-center gap-3 group">
-            <div className="w-10 h-10 bg-white rounded-lg flex items-center justify-center group-hover:bg-orange-50 transition-colors">
-              <GraduationCap className="w-6 h-6 text-orange-500" />
-            </div>
-            <div className="flex flex-col">
-              <span className="font-bold text-lg text-white leading-tight">SHADDAI</span>
-              <span className="font-semibold text-sm text-orange-200 leading-tight -mt-1">SCHOOL</span>
-            </div>
-          </Link>
+  <div className="bg-white rounded-lg flex items-center justify-center group-hover:bg-orange-50 transition-colors">
+    <Image
+      src="/images/logo-school.png"
+      alt="Shaddai School Logo"
+      width={64}
+      height={64}
+      className="object-contain"
+    />
+  </div>
+  <div className="flex flex-col">
+    <span className="font-bold text-lg text-white leading-tight">SHADDAI</span>
+    <span className="font-semibold text-sm text-orange-200 leading-tight -mt-1">SCHOOL</span>
+  </div>
+</Link>
+
 
           {/* Desktop Navigation */}
           <nav className="hidden md:flex items-center gap-1">
