@@ -4,7 +4,6 @@ import { generarRequisitosPdf } from "@/utils/generaterequisitospdf"
 import { useEffect, useRef, useState } from "react"
 import Image from "next/image"
 import Link from "next/link"
-import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar"
 import { Button } from "@/components/ui/button"
 import {
   Star,
@@ -33,25 +32,19 @@ import WaitlistModal from "@/components/waitlist-modal"
 
 const testimonials = [
   {
-    name: "Familia García",
-    avatar: "/images/familias-1.webp",
+    name: "Yeraldi",
     text: "Lo que más me gusta es el ambiente cálido y familiar que se siente desde el primer día. Se nota que el personal está comprometido con el bienestar y desarrollo de los niños, y me da mucha tranquilidad saber que mi hijo está en buenas manos. Además, valoro mucho las actividades lúdicas y educativas que fomentan su creatividad y aprendizaje.",
     rating: 5,
-    role: "Padres de estudiante de Kinder",
   },
   {
-    name: "Familia Rodríguez",
-    avatar: "/images/familias-2.webp",
-    text: "El enfoque humano y cristiano de SHADDAI SCHOOL nos conquistó. Aquí los niños aprenden, se sienten amados y crecen con propósito.",
+    name: "Gloribel rodriguez",
+    text: "Lo que más amo es la constancia que Han mantenido a lo largo de estos años que tenemos con ustedes,, saber que hacer en cada etapa y motivarnos a nosotros como padres a vivirlas con emoción, agradecida eternamente.",
     rating: 5,
-    role: "Padres de estudiante de Pre-K",
   },
   {
-    name: "Familia Martínez",
-    avatar: "/images/familias-3.webp",
-    text: "La preparación académica es excepcional. Mi hijo llegó al primer grado con ventajas notables en inglés y matemáticas.",
+    name: "Adelma Luna",
+    text: "Todo en general desde la entrada hasta la salida, todo el personal muy atentos envueltos en cada niñ@, amabilidad, comprensión, los cuidados y el trato que recibió mi hijo en el poco tiempo que estuvo fue mucho. Dios bendiga ese trabajo tan lindo que ustedes hacen.",
     rating: 5,
-    role: "Padres de egresado",
   },
 ]
 
@@ -75,13 +68,13 @@ const admissionRequirements = [
 const facilities = [
   {
     name: "Aulas Modernas",
-    description: "Espacios amplios, luminosos y equipados con tecnología educativa",
+    description: "Espacios amplios, luminosos, ambientados y equipados con tecnología educativa",
     image: "/images/aula-3.webp",
     icon: Building,
   },
   {
-    name: "Laboratorio de Ciencias",
-    description: "Espacio para exploración científica adaptado para preescolar",
+    name: "Aula explorativa",
+    description: "Espacio para exploración adaptado para preescolar",
     image: "/images/aula-2.webp",
     icon: Microscope,
   },
@@ -92,9 +85,9 @@ const facilities = [
     icon: Palette,
   },
   {
-    name: "Sala de Música",
-    description: "Espacio acústico para educación musical y expresión corporal",
-    image: "/images/aula-4.webp",
+    name: "Aulas Limpias",
+    description: "Espacio limpio y ordenado para el aprendizaje",
+    image: "/images/aula-limpia.webp",
     icon: Music,
   },
 ]
@@ -231,15 +224,21 @@ export default function ShaddaiSchoolPage() {
 
       {/* Hero Section - Optimizado pero sin contenido extra */}
       <section id="inicio" className="relative min-h-screen flex items-center justify-center overflow-hidden">
-        {/* Background Image */}
+        {/* Background video */}
         <div className="absolute inset-0 z-0">
-          <Image
-            src="/images/hero-school-2.webp"
-            alt="Campus de Shaddai School"
-            fill
-            className="object-cover scale-105"
-            priority
-          />
+          <video
+  className="absolute inset-0 w-full h-full object-cover object-top"
+  style={{ transform: "translateY(-10%)" }}
+  autoPlay
+  loop
+  muted
+  playsInline
+>
+  <source src="/videos/hero-school.mp4" type="video/mp4" />
+  Tu navegador no soporta videos.
+</video>
+
+
           <div className="absolute inset-0 bg-gradient-to-r from-orange-800/40 via-orange-700/35 to-orange-600/25"></div>
         </div>
 
@@ -438,115 +437,116 @@ export default function ShaddaiSchoolPage() {
         </div>
       </section>
 
-      {/* Academic Program Section - Con animaciones */}
-      <section id="programa" className="py-16 lg:py-24 bg-orange-50" ref={programRef}>
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          {/* Section Hero */}
-          <div className="text-center mb-12 lg:mb-20 opacity-0 animate-fade-in-up">
-            <div className="inline-flex items-center gap-2 bg-orange-200 text-orange-800 px-4 py-2 rounded-full text-sm font-medium mb-6">
-              <GraduationCap className="w-4 h-4" />
-              Programa Académico
-            </div>
-            <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-orange-800 mb-4 sm:mb-6">
-              Educación del presente,
-              <br />
-              <span className="text-orange-600">visión del futuro</span>
-            </h2>
-            <p className="text-lg sm:text-xl text-orange-700 max-w-3xl mx-auto leading-relaxed">
-              Un currículo con propósito: local en raíces, global en visión. Preparamos a nuestros estudiantes para un
-              mundo sin fronteras.
-            </p>
+      <section id="programa" className="py-20 lg:py-28 bg-orange-50" ref={programRef}>
+  <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    {/* Encabezado */}
+    <div className="text-center mb-16 lg:mb-24 opacity-0 animate-fade-in-up">
+      <div className="inline-flex items-center gap-2 bg-orange-200 text-orange-800 px-4 py-2 rounded-full text-sm font-semibold mb-6">
+        <GraduationCap className="w-5 h-5" />
+        Programa Académico
+      </div>
+      <h2 className="text-4xl lg:text-5xl font-extrabold text-orange-800 mb-4">
+        Educación del presente, <br />
+        <span className="text-orange-600">visión del futuro</span>
+      </h2>
+      <p className="text-lg lg:text-xl text-orange-700 max-w-2xl mx-auto leading-relaxed">
+        Un currículo con propósito: local en raíces, global en visión. Preparamos a nuestros estudiantes para un
+        mundo sin fronteras.
+      </p>
+    </div>
+
+    {/* Video institucional */}
+    <div className="relative aspect-video rounded-3xl overflow-hidden mb-20 shadow-xl opacity-0 animate-fade-in-up">
+      <video
+        className="w-full h-full object-cover"
+        poster="/images/poster-video.webp"
+        controls
+      >
+        <source src="/videos/video-class-1.mp4" type="video/mp4" />
+        Tu navegador no soporta video HTML5.
+      </video>
+    </div>
+
+    {/* Features visuales */}
+    <div className="grid lg:grid-cols-3 gap-8 mb-24">
+      {programFeatures.map((item, index) => (
+        <div
+          key={index}
+          className="bg-white border border-orange-200 p-6 rounded-2xl shadow-sm hover:shadow-lg transition-all duration-300 opacity-0 animate-fade-in-up"
+        >
+          <div className="w-10 h-10 bg-orange-600 rounded-full flex items-center justify-center mb-4 animate-float">
+            <Check className="w-5 h-5 text-white" />
           </div>
+          <p className="text-orange-800 font-medium leading-relaxed">{item}</p>
+        </div>
+      ))}
+    </div>
 
-          {/* Program Features */}
-          <div className="grid md:grid-cols-2 gap-6 lg:gap-8 mb-16 lg:mb-24">
-            {programFeatures.map((item, index) => (
-              <div
-                key={index}
-                className={`group p-6 lg:p-8 bg-orange-100 rounded-2xl hover:bg-orange-200 hover:shadow-lg transition-all duration-300 border border-orange-200 opacity-0 animate-slide-in-left stagger-${index % 2 === 0 ? "1" : "2"} transform hover:scale-105`}
-              >
-                <div className="flex items-start gap-4">
-                  <div className="w-8 h-8 bg-orange-600 rounded-full flex items-center justify-center flex-shrink-0 group-hover:bg-orange-700 transition-colors animate-float">
-                    <Check className="w-4 h-4 text-white" />
-                  </div>
-                  <p className="text-orange-800 leading-relaxed group-hover:text-orange-900 transition-colors">
-                    {item}
-                  </p>
-                </div>
-              </div>
-            ))}
-          </div>
-
-          {/* Bilingual Approach */}
-          <div className="bg-orange-100 rounded-3xl p-8 lg:p-16 opacity-0 animate-fade-in-up">
-            <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12 items-center">
-              <div className="relative opacity-0 animate-slide-in-left">
-                <div className="aspect-[4/3] relative overflow-hidden rounded-2xl">
-                  <Image src="/images/aula.webp" alt="Aula bilingüe" fill className="object-cover" />
-                </div>
-                <div className="absolute top-6 right-6 bg-white px-6 py-3 rounded-full shadow-lg animate-float">
-                  <div className="flex items-center gap-2">
-                    <Globe className="w-5 h-5 text-orange-600" />
-                    <span className="font-bold text-orange-800">50% EN / 50% ES</span>
-                  </div>
-                </div>
-                <div className="absolute -bottom-6 -left-6 bg-orange-600 text-white p-6 rounded-2xl shadow-xl animate-float">
-                  <div className="text-center">
-                    <div className="text-2xl font-bold">100%</div>
-                    <div className="text-sm opacity-90">Inmersión</div>
-                  </div>
-                </div>
-              </div>
-
-              <div className="space-y-8 opacity-0 animate-slide-in-right">
-                <div>
-                  <h3 className="text-2xl lg:text-3xl font-bold text-orange-800 mb-6">
-                    Enfoque Bilingüe <span className="text-orange-600">Inmersivo</span>
-                  </h3>
-                  <p className="text-orange-700 leading-relaxed text-lg">
-                    Nuestro programa bilingüe no es solo enseñar inglés como materia, sino vivir el idioma como
-                    herramienta de comunicación natural. Los niños desarrollan fluidez en ambos idiomas a través de
-                    experiencias auténticas y significativas.
-                  </p>
-                </div>
-
-                <div className="space-y-6">
-                  {[
-                    {
-                      icon: Lightbulb,
-                      title: "Inmersión Natural",
-                      desc: "Alternancia diaria entre español e inglés en todas las actividades",
-                    },
-                    {
-                      icon: Users,
-                      title: "Maestros Nativos",
-                      desc: "Equipo bilingüe con certificaciones internacionales",
-                    },
-                    {
-                      icon: Award,
-                      title: "Preparación Certificada",
-                      desc: "Base sólida para certificaciones internacionales futuras",
-                    },
-                  ].map((item, index) => (
-                    <div
-                      key={index}
-                      className={`flex items-start gap-4 p-4 bg-orange-200 rounded-xl opacity-0 animate-fade-in-up stagger-${index + 1} transform hover:scale-105 transition-transform duration-300`}
-                    >
-                      <div className="w-12 h-12 bg-orange-600 rounded-full flex items-center justify-center flex-shrink-0 animate-float">
-                        <item.icon className="w-6 h-6 text-white" />
-                      </div>
-                      <div>
-                        <h4 className="font-bold text-orange-800 mb-2">{item.title}</h4>
-                        <p className="text-orange-700">{item.desc}</p>
-                      </div>
-                    </div>
-                  ))}
-                </div>
-              </div>
-            </div>
+    {/* Enfoque Bilingüe */}
+    <div className="grid lg:grid-cols-2 gap-12 items-center bg-orange-100 p-10 lg:p-16 rounded-3xl opacity-0 animate-fade-in-up">
+      <div className="relative">
+        <div className="aspect-[4/3] relative overflow-hidden rounded-2xl">
+          <Image src="/images/aula-3.webp" alt="Aula bilingüe" fill className="object-cover" />
+        </div>
+        <div className="absolute top-6 right-6 bg-white px-6 py-3 rounded-full shadow-lg animate-float">
+          <div className="flex items-center gap-2">
+            <Globe className="w-5 h-5 text-orange-600" />
+            <span className="font-bold text-orange-800">50% EN / 50% ES</span>
           </div>
         </div>
-      </section>
+        <div className="absolute -bottom-6 -left-6 bg-orange-600 text-white p-6 rounded-2xl shadow-xl animate-float">
+          <div className="text-center">
+            <div className="text-2xl font-bold">50%</div>
+            <div className="text-sm opacity-90">Inmersión</div>
+          </div>
+        </div>
+      </div>
+
+      <div className="space-y-8">
+        <h3 className="text-3xl font-bold text-orange-800">Enfoque Bilingüe</h3>
+        <p className="text-orange-700 text-lg leading-relaxed">
+          Nuestro programa bilingüe no es solo enseñar inglés como materia, sino vivir el idioma como herramienta de
+          comunicación natural. Los niños desarrollan fluidez en ambos idiomas a través de experiencias auténticas y
+          significativas.
+        </p>
+
+        <div className="space-y-6">
+          {[
+            {
+              icon: Lightbulb,
+              title: "Inmersión Natural",
+              desc: "Alternancia diaria entre español e inglés en todas las actividades",
+            },
+            {
+              icon: Users,
+              title: "Maestros Capacitados",
+              desc: "Equipo bien preparado en pedagogía bilingüe y cultural",
+            },
+            {
+              icon: Award,
+              title: "Preparación Certificada",
+              desc: "Nuestros profesores están certificados en enseñanza bilingüe y metodologías activas",
+            },
+          ].map((item, index) => (
+            <div
+              key={index}
+              className="flex items-start gap-4 p-5 bg-white rounded-xl shadow-sm hover:shadow-md transition duration-300 animate-fade-in-up"
+            >
+              <div className="w-12 h-12 bg-orange-600 rounded-full flex items-center justify-center animate-float">
+                <item.icon className="w-6 h-6 text-white" />
+              </div>
+              <div>
+                <h4 className="font-semibold text-orange-800 mb-1">{item.title}</h4>
+                <p className="text-orange-700 text-sm">{item.desc}</p>
+              </div>
+            </div>
+          ))}
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
 
       {/* Facilities Section - Con animaciones */}
       <section
@@ -637,62 +637,76 @@ export default function ShaddaiSchoolPage() {
 
 
           {/* Safety Features */}
-          <div className="bg-white/10 backdrop-blur-sm rounded-3xl p-8 lg:p-16 opacity-0 animate-fade-in-up">
-            <div className="text-center mb-12">
-              <div className="w-16 h-16 bg-white/20 rounded-full flex items-center justify-center mx-auto mb-6 animate-float">
-                <Shield className="w-8 h-8 text-white" />
-              </div>
-              <h3 className="text-2xl lg:text-3xl font-bold text-white mb-4">Seguridad y Bienestar Integral</h3>
-              <p className="text-lg lg:text-xl text-orange-100 max-w-2xl mx-auto">
-                La seguridad de nuestros estudiantes es nuestra prioridad absoluta. Contamos con protocolos estrictos,
-                tecnología avanzada y personal altamente capacitado.
-              </p>
-            </div>
+<div className="bg-white/10 backdrop-blur-sm rounded-3xl p-8 lg:p-16 opacity-0 animate-fade-in-up">
+  <div className="text-center mb-16">
+    <div className="w-16 h-16 bg-white/20 rounded-full flex items-center justify-center mx-auto mb-6 animate-float">
+      <Shield className="w-8 h-8 text-white" />
+    </div>
+    <h3 className="text-3xl font-bold text-white mb-4">Seguridad y Bienestar Integral</h3>
+    <p className="text-lg lg:text-xl text-orange-100 max-w-2xl mx-auto">
+      La seguridad de nuestros estudiantes es nuestra prioridad absoluta. Contamos con protocolos estrictos,
+      tecnología avanzada y personal altamente capacitado.
+    </p>
+  </div>
 
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-              {[
-                {
-                  icon: Shield,
-                  title: "Acceso Controlado",
-                  desc: "Sistema de tarjetas, cámaras de seguridad 24/7 y control de visitantes",
-                  features: ["Cámaras HD", "Control de acceso", "Monitoreo 24/7"],
-                },
-                {
-                  icon: Users,
-                  title: "Personal Certificado",
-                  desc: "Equipo capacitado en primeros auxilios, emergencias y protocolos de seguridad",
-                  features: ["Primeros auxilios", "Certificaciones", "Capacitación continua"],
-                },
-                {
-                  icon: Heart,
-                  title: "Protocolos Sanitarios",
-                  desc: "Estándares de higiene y salud actualizados según normativas internacionales",
-                  features: ["Higiene estricta", "Protocolos Generales", "Salud preventiva"],
-                },
-              ].map((item, index) => (
-                <div
-                  key={index}
-                  className={`text-center space-y-6 p-6 bg-white/10 rounded-2xl backdrop-blur-sm opacity-0 animate-scale-in stagger-${index + 1} transform hover:scale-105 transition-transform duration-300`}
-                >
-                  <div className="w-16 h-16 bg-white/20 rounded-full flex items-center justify-center mx-auto animate-float">
-                    <item.icon className="w-8 h-8 text-white" />
-                  </div>
-                  <div>
-                    <h4 className="text-xl font-bold text-white mb-3">{item.title}</h4>
-                    <p className="text-orange-100 mb-4">{item.desc}</p>
-                    <div className="space-y-2">
-                      {item.features.map((feature, idx) => (
-                        <div key={idx} className="flex items-center justify-center gap-2">
-                          <Check className="w-4 h-4 text-orange-200" />
-                          <span className="text-sm text-orange-100">{feature}</span>
-                        </div>
-                      ))}
-                    </div>
-                  </div>
-                </div>
-              ))}
-            </div>
+  <div className="grid lg:grid-cols-3 gap-10">
+    {[
+      {
+        icon: Shield,
+        title: "Acceso Controlado",
+        desc: "Sistema de tarjetas, cámaras de seguridad 24/7 y control de visitantes.",
+        features: ["Cámaras HD", "Control de acceso", "Monitoreo 24/7"],
+        image: "/images/hero-school-2.webp",
+      },
+      {
+        icon: Users,
+        title: "Personal Certificado",
+        desc: "Equipo capacitado en primeros auxilios, emergencias y protocolos de seguridad.",
+        features: ["Primeros auxilios", "Certificaciones", "Capacitación continua"],
+        image: "/images/aula-6.webp",
+      },
+      {
+        icon: Heart,
+        title: "Protocolos Sanitarios",
+        desc: "Estándares de higiene y salud actualizados según normativas internacionales.",
+        features: ["Higiene estricta", "Protocolos Generales", "Salud preventiva"],
+        image: "/images/aula-5.webp",
+      },
+    ].map((item, index) => (
+      <div
+        key={index}
+        className="group bg-white/10 backdrop-blur-lg rounded-2xl overflow-hidden shadow-xl hover:shadow-2xl transition duration-300 transform hover:scale-[1.03] opacity-0 animate-fade-in-up"
+      >
+        {/* Imagen superior */}
+        <div className="relative aspect-[4/3] w-full overflow-hidden">
+          <Image
+            src={item.image}
+            alt={item.title}
+            fill
+            className="object-cover group-hover:scale-105 transition-transform duration-500"
+          />
+        </div>
+
+        {/* Contenido */}
+        <div className="p-6 text-center space-y-5">
+          <div className="w-14 h-14 bg-white/20 rounded-full flex items-center justify-center mx-auto animate-float">
+            <item.icon className="w-7 h-7 text-white" />
           </div>
+          <h4 className="text-xl font-bold text-white">{item.title}</h4>
+          <p className="text-orange-100 text-sm">{item.desc}</p>
+          <div className="space-y-2">
+            {item.features.map((feature, idx) => (
+              <div key={idx} className="flex items-center justify-center gap-2">
+                <Check className="w-4 h-4 text-orange-200" />
+                <span className="text-sm text-orange-100">{feature}</span>
+              </div>
+            ))}
+          </div>
+        </div>
+      </div>
+    ))}
+  </div>
+</div>
         </div>
       </section>
 
@@ -734,15 +748,8 @@ export default function ShaddaiSchoolPage() {
                   {testimonial.text}
                 </blockquote>
                 <div className="flex items-center gap-4">
-                  <Avatar className="w-14 h-14 border-2 border-white/20">
-                    <AvatarImage src="/images/prueba.jpg" alt={testimonial.name} />
-                    <AvatarFallback className="bg-white/20 text-white font-semibold text-lg">
-                      {testimonial.name.charAt(0)}
-                    </AvatarFallback>
-                  </Avatar>
                   <div>
                     <div className="font-bold text-white text-lg">{testimonial.name}</div>
-                    <div className="text-orange-200">{testimonial.role}</div>
                   </div>
                 </div>
               </div>
@@ -878,7 +885,7 @@ export default function ShaddaiSchoolPage() {
           {/* CTA Buttons */}
           <div className="text-center opacity-0 animate-fade-in-up">
             <div className="inline-flex flex-col sm:flex-row gap-4 max-w-md mx-auto">
-              <Link href="https://wa.me/18090000000" target="_blank" className="flex-1">
+              <Link href="https://wa.me/18295525935" target="_blank" className="flex-1">
                 <Button
                   size="lg"
                   className="w-full bg-green-600 hover:bg-green-700 text-white px-8 py-4 rounded-full font-semibold text-lg shadow-lg hover:shadow-xl transition-all duration-300 transform hover:scale-105 cursor-pointer"

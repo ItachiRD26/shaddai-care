@@ -123,7 +123,7 @@ export async function POST(request: NextRequest) {
               <p style="color: #92400e; margin: 0; font-size: 14px;">
                 <strong>Teléfono:</strong> (809) 000-0000<br>
                 <strong>Email:</strong> admisiones@shaddaischool.edu.do<br>
-                <strong>WhatsApp:</strong> <a href="https://wa.me/18090000000" style="color: #ea580c;">Enviar mensaje</a>
+                <strong>WhatsApp:</strong> <a href="https://wa.me/18295525935" style="color: #ea580c;">Enviar mensaje</a>
               </p>
             </div>
             

@@ -1,7 +1,7 @@
 "use client"
 
 import Link from "next/link"
-import { GraduationCap, Phone, Mail, MapPin, Award, Shield } from "lucide-react"
+import { GraduationCap, Phone, Mail, MapPin, Shield } from "lucide-react"
 
 export default function SchoolFooter() {
   return (
@@ -21,10 +21,6 @@ export default function SchoolFooter() {
               preparación académica integral.
             </p>
             <div className="flex items-center gap-4">
-              <div className="flex items-center gap-2">
-                <Award className="w-4 h-4 text-orange-300" />
-                <span className="text-sm text-orange-200">Institución Certificada</span>
-              </div>
               <div className="flex items-center gap-2">
                 <Shield className="w-4 h-4 text-green-400" />
                 <span className="text-sm text-orange-200">Campus Seguro</span>
@@ -66,7 +62,7 @@ export default function SchoolFooter() {
               </div>
               <div className="flex items-center gap-3">
                 <Phone className="w-5 h-5 text-orange-300 flex-shrink-0" />
-                <a href="tel:+18090000000" className="text-sm text-orange-200 hover:text-white transition-colors">
+                <a href="tel:+18295525935" className="text-sm text-orange-200 hover:text-white transition-colors">
                   (809) 000-0000
                 </a>
               </div>

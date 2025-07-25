@@ -1,7 +1,7 @@
+// app/layout.tsx
 import type { Metadata } from "next"
 import "@/app/globals.css"
 import { Inter, Baloo_2 } from "next/font/google"
-
 const inter = Inter({ subsets: ["latin"] })
 const baloo2 = Baloo_2({ subsets: ["latin"], variable: "--font-display" })
 
