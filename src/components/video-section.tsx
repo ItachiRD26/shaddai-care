@@ -112,7 +112,7 @@ export default function VideoSection() {
                     poster="/placeholder.svg?height=500&width=800"
                     onEnded={() => setIsPlaying(false)}
                   >
-                    <source src="/videos/mensaje.mp4" type="video/mp4" />
+                    <source src="/videos/video-class-2.webm" type="video/mp4" />
                     Tu navegador no soporta el elemento de video.
                   </video>
 

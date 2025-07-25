@@ -234,7 +234,7 @@ export default function ShaddaiSchoolPage() {
   muted
   playsInline
 >
-  <source src="/videos/hero-school.mp4" type="video/mp4" />
+  <source src="/videos/hero-school.webm" type="video/mp4" />
   Tu navegador no soporta videos.
 </video>
 
@@ -462,7 +462,7 @@ export default function ShaddaiSchoolPage() {
         poster="/images/poster-video.webp"
         controls
       >
-        <source src="/videos/video-class-1.mp4" type="video/mp4" />
+        <source src="/videos/video-class-1.webm" type="video/mp4" />
         Tu navegador no soporta video HTML5.
       </video>
     </div>
