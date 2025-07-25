@@ -37,7 +37,7 @@ const testimonials = [
     rating: 5,
   },
   {
-    name: "Gloribel rodriguez",
+    name: "Gloribel Rodriguez",
     text: "Lo que más amo es la constancia que Han mantenido a lo largo de estos años que tenemos con ustedes,, saber que hacer en cada etapa y motivarnos a nosotros como padres a vivirlas con emoción, agradecida eternamente.",
     rating: 5,
   },
@@ -222,57 +222,66 @@ export default function ShaddaiSchoolPage() {
       {/* Modal de Lista de Espera */}
       <WaitlistModal isOpen={isModalOpen} onClose={closeModal} />
 
-      {/* Hero Section - Optimizado pero sin contenido extra */}
-      <section id="inicio" className="relative min-h-screen flex items-center justify-center overflow-hidden">
-        {/* Background video */}
-        <div className="absolute inset-0 z-0">
-          <video
-  className="absolute inset-0 w-full h-full object-cover object-top"
-  style={{ transform: "translateY(-10%)" }}
-  autoPlay
-  loop
-  muted
-  playsInline
->
-  <source src="/videos/hero-school.webm" type="video/mp4" />
-  Tu navegador no soporta videos.
-</video>
+{/* Hero Section - Optimizado con video en PC e imagen en móviles */}
+<section id="inicio" className="relative min-h-screen pt-24 flex items-center justify-center overflow-hidden">
+  {/* Background Video (solo en escritorio) */}
+  <div className="absolute inset-0 z-0 hidden sm:block">
+    <video
+      className="absolute inset-0 w-full h-full object-cover object-button"
+      style={{ transform: "translateY(-10%)" }}
+      autoPlay
+      loop
+      muted
+      playsInline
+    >
+      <source src="/videos/video-class-2.webm" type="video/webm" />
+      Tu navegador no soporta videos.
+    </video>
+  </div>
 
+  {/* Background Image (solo en móviles) */}
+  <div className="absolute inset-0 z-0 block sm:hidden">
+    <Image
+      src="/images/kinder.jpg"
+      alt="Shaddai School"
+      fill
+      className="object-cover object-top"
+      style={{ transform: "translateY(-10%)" }}
+    />
+  </div>
 
-          <div className="absolute inset-0 bg-gradient-to-r from-orange-800/40 via-orange-700/35 to-orange-600/25"></div>
-        </div>
+  {/* Content */}
+  <div className="relative z-10 max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 text-center text-white">
+    <div className="hero-content space-y-8 lg:space-y-12 py-20 lg:py-32">
+      {/* Main Title */}
+      <div className="space-y-4">
+        <h1 className="text-5xl sm:text-6xl lg:text-8xl font-bold leading-tight">Bienvenido a</h1>
+        <h2 className="text-4xl sm:text-5xl lg:text-6xl font-bold leading-tight text-orange-200">
+          SHADDAI SCHOOL
+        </h2>
+      </div>
 
-        {/* Content */}
-        <div className="relative z-10 max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 text-center text-white">
-          <div className="hero-content space-y-8 lg:space-y-12 py-20 lg:py-32">
-            {/* Main Title */}
-            <div className="space-y-4">
-              <h1 className="text-5xl sm:text-6xl lg:text-8xl font-bold leading-tight">Bienvenido a</h1>
-              <h2 className="text-4xl sm:text-5xl lg:text-6xl font-bold leading-tight text-orange-200">
-                SHADDAI SCHOOL
-              </h2>
-            </div>
+      {/* Subtitle */}
+      <p className="text-xl sm:text-2xl lg:text-3xl text-orange-100 leading-relaxed max-w-3xl mx-auto font-light">
+        Educación bilingüe, cristiana y de excelencia académica para el futuro de tu hijo
+      </p>
 
-            {/* Subtitle */}
-            <p className="text-xl sm:text-2xl lg:text-3xl text-orange-100 leading-relaxed max-w-3xl mx-auto font-light">
-              Educación bilingüe, cristiana y de excelencia académica para el futuro de tu hijo
-            </p>
+      {/* CTA Button */}
+      <div className="pt-12">
+        <Button
+          size="lg"
+          onClick={openModal}
+          className="cursor-pointer bg-gradient-to-r from-orange-500 via-orange-600 to-orange-700 hover:from-orange-600 hover:via-orange-700 hover:to-orange-800 text-white px-12 sm:px-16 py-6 sm:py-7 rounded-2xl font-bold text-xl sm:text-2xl shadow-2xl hover:shadow-3xl transition-all duration-500 transform hover:scale-110 hover:-translate-y-2 animate-float border-3 border-white/30 backdrop-blur-sm relative overflow-hidden group"
+        >
+          <div className="absolute inset-0 bg-gradient-to-r from-white/0 via-white/20 to-white/0 transform -skew-x-12 -translate-x-full group-hover:translate-x-full transition-transform duration-1000"></div>
+          <Users className="w-7 h-7 sm:w-8 sm:h-8 mr-4 relative z-10" />
+          <span className="relative z-10">Únete a la Lista de Espera</span>
+        </Button>
+      </div>
+    </div>
+  </div>
+</section>
 
-            {/* CTA Button */}
-            <div className="pt-12">
-              <Button
-                size="lg"
-                onClick={openModal}
-                className="cursor-pointer bg-gradient-to-r from-orange-500 via-orange-600 to-orange-700 hover:from-orange-600 hover:via-orange-700 hover:to-orange-800 text-white px-12 sm:px-16 py-6 sm:py-7 rounded-2xl font-bold text-xl sm:text-2xl shadow-2xl hover:shadow-3xl transition-all duration-500 transform hover:scale-110 hover:-translate-y-2 animate-float border-3 border-white/30 backdrop-blur-sm relative overflow-hidden group"
-              >
-                <div className="absolute inset-0 bg-gradient-to-r from-white/0 via-white/20 to-white/0 transform -skew-x-12 -translate-x-full group-hover:translate-x-full transition-transform duration-1000"></div>
-                <Users className="w-7 h-7 sm:w-8 sm:h-8 mr-4 relative z-10" />
-                <span className="relative z-10">Únete a la Lista de Espera</span>
-              </Button>
-            </div>
-          </div>
-        </div>
-      </section>
 
       {/* Admissions Section - Con animaciones */}
       <section id="admisiones" className="py-16 lg:py-24 bg-orange-50" ref={admissionsRef}>
