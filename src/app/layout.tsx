@@ -1,7 +1,7 @@
-// app/layout.tsx
 import type { Metadata } from "next"
 import "@/app/globals.css"
 import { Inter, Baloo_2 } from "next/font/google"
+
 const inter = Inter({ subsets: ["latin"] })
 const baloo2 = Baloo_2({ subsets: ["latin"], variable: "--font-display" })
 
@@ -14,9 +14,7 @@ export const metadata: Metadata = {
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <html lang="es" className={`${inter.className} ${baloo2.variable}`}>
-      <body className="antialiased">
-        {children}
-      </body>
+      <body>{children}</body>
     </html>
   )
 }

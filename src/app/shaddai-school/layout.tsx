@@ -24,7 +24,7 @@ export const metadata: Metadata = {
   authors: [{ name: "Shaddai School", url: "https://shadaaischool.com" }],
   creator: "Shaddai School",
   icons: {
-    icon: "/favicon.ico",
+    icon: "/images/logo-school.png",
   },
   openGraph: {
     title: "Shaddai School - Excelencia Educativa",
