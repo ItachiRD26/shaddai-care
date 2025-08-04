@@ -48,17 +48,6 @@ export default function VideoSection() {
   return (
     <section ref={sectionRef} className="py-12 sm:py-16 lg:py-24 bg-white relative overflow-hidden">
       {/* Distinctive Element - Video Frame Pattern */}
-      <div className="absolute inset-0 pointer-events-none">
-        <div className="absolute top-16 right-16 w-24 h-16 border-2 border-[#f68026]/20 rounded-lg animate-pulse"></div>
-        <div
-          className="absolute bottom-24 left-12 w-32 h-20 border-2 border-[#4f75ff]/20 rounded-lg animate-bounce"
-          style={{ animationDuration: "3s" }}
-        ></div>
-        <div
-          className="absolute top-1/3 right-1/3 w-8 h-8 bg-[#fcafc2]/30 rounded-full animate-ping"
-          style={{ animationDelay: "1s" }}
-        ></div>
-      </div>
 
       <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 relative">
         <div

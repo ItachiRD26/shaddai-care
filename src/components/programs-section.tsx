@@ -71,15 +71,7 @@ export default function ProgramsSection() {
     <section ref={sectionRef} className="py-12 sm:py-16 lg:py-24 bg-gray-50 relative overflow-hidden">
       {/* Distinctive Element - Animated Background Pattern */}
       <div className="absolute inset-0 pointer-events-none">
-        <div
-          className="absolute top-10 left-10 w-20 h-20 border-2 border-[#1d7748]/10 rounded-full animate-spin"
-          style={{ animationDuration: "10s" }}
-        ></div>
         <div className="absolute bottom-20 right-20 w-32 h-32 bg-[#fcafc2]/5 rounded-full animate-pulse"></div>
-        <div
-          className="absolute top-1/2 left-1/4 w-16 h-16 bg-[#4f75ff]/10 rotate-45 animate-bounce"
-          style={{ animationDuration: "4s" }}
-        ></div>
       </div>
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative">
@@ -179,7 +171,7 @@ export default function ProgramsSection() {
           </p>
           <Link href="/contacto">
             <Button className="bg-[#1d7748] hover:bg-[#1d7748]/90 cursor-pointer text-white font-medium px-6 sm:px-8 py-3 sm:py-4 rounded-lg text-base sm:text-lg shadow-sm hover:shadow-md transition-all duration-300 hover:scale-105">
-              Agendar visita gratuita
+              Agendar Visita
             </Button>
           </Link>
         </div>

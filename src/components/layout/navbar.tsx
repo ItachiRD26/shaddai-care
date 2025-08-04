@@ -32,9 +32,9 @@ export default function Navbar() {
               <Image
                 src="/images/logo.png"
                 alt="Shaddai Day-Care Logo"
-                width={252}
-                height={252}
-                className="w-252 h-252 object-contain"
+                width={64}
+                height={64}
+                className="w-64 h-64 object-contain"
               />
               </div>
             </div>
@@ -49,7 +49,7 @@ export default function Navbar() {
           </Link>
 
           <div className="hidden lg:flex items-center space-x-8">
-            {["NOSOTROS", "PROGRAMAS", "INSCRIPCIONES", "GALERIA", "CONTACTO"].map((name) => (
+            {["NOSOTROS", "PROGRAMAS", "INSCRIPCIONES", "BLOG", "GALERIA", "CONTACTO"].map((name) => (
               <Link
                 key={name}
                 href={`/${name.toLowerCase() === "inicio" ? "" : name.toLowerCase()}`}
@@ -111,7 +111,7 @@ export default function Navbar() {
         <div className="lg:hidden bg-black/60 backdrop-blur-md border-t border-white/10 shadow-xl">
           <div className="px-6 pt-6 pb-8 space-y-5">
             <nav className="flex flex-col space-y-3 text-white text-lg font-medium tracking-wide">
-              {["NOSOTROS", "PROGRAMAS", "INSCRIPCIONES", "GALERIA", "CONTACTO"].map((name) => (
+              {["NOSOTROS", "PROGRAMAS", "INSCRIPCIONES", "BLOG", "GALERIA", "CONTACTO"].map((name) => (
                 <Link
                   key={name}
                   href={`/${name.toLowerCase() === "inicio" ? "" : name.toLowerCase()}`}
