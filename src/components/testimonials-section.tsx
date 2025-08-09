@@ -1,8 +1,7 @@
 "use client"
 
 import { useEffect, useRef, useState } from "react"
-import Image from "next/image"
-import { Star, Quote, ChevronLeft, ChevronRight, MapPin } from "lucide-react"
+import { Star, Quote, ChevronLeft, ChevronRight, MapPin } from 'lucide-react'
 
 const testimonials = [
   {
@@ -12,7 +11,6 @@ const testimonials = [
     parentName: "María González",
     childInfo: "Mamá de Sofía, 3 años",
     location: "Valle Feliz",
-    image: "/images/prueba.jpg?height=80&width=80",
     rating: 5,
     timeAtCenter: "2 años",
   },
@@ -23,7 +21,6 @@ const testimonials = [
     parentName: "Carlos Rodríguez",
     childInfo: "Papá de Diego, 4 años",
     location: "Centro",
-    image: "/images/prueba.jpg?height=80&width=80",
     rating: 5,
     timeAtCenter: "1.5 años",
   },
@@ -34,7 +31,6 @@ const testimonials = [
     parentName: "Ana Martínez",
     childInfo: "Mamá de Emma, 18 meses",
     location: "Residencial Norte",
-    image: "/images/prueba.jpg?height=80&width=80",
     rating: 5,
     timeAtCenter: "8 meses",
   },
@@ -135,49 +131,39 @@ export default function TestimonialsSection() {
 
           {/* Testimonial Card */}
           <div className="bg-white rounded-2xl p-6 sm:p-8 lg:p-12 shadow-sm border border-gray-100 mx-8 sm:mx-12 transition-all duration-500 hover:shadow-md">
-            <div className="flex flex-col lg:flex-row items-center gap-6 sm:gap-8">
-              {/* Profile Section */}
-              <div className="flex-shrink-0 text-center lg:text-left">
-                <div className="relative inline-block mb-4 sm:mb-6">
-                  <Image
-                    src={currentTestimonial.image || "/placeholder.svg"}
-                    alt={currentTestimonial.parentName}
-                    width={80}
-                    height={80}
-                    className="w-16 h-16 sm:w-20 sm:h-20 lg:w-24 lg:h-24 rounded-full border-4 border-gray-100 shadow-sm object-cover transition-transform duration-300 hover:scale-105"
+            <div className="text-center max-w-4xl mx-auto">
+              {/* Quote Icon */}
+              <Quote className="w-8 h-8 sm:w-10 sm:h-10 text-[#1d7748] mx-auto mb-6 sm:mb-8" />
+              
+              {/* Testimonial Quote */}
+              <blockquote className="text-gray-700 text-lg sm:text-xl lg:text-2xl leading-relaxed mb-8 sm:mb-10 font-medium">
+                "{currentTestimonial.quote}"
+              </blockquote>
+
+              {/* Rating */}
+              <div className="flex justify-center gap-1 mb-6 sm:mb-8">
+                {Array.from({ length: currentTestimonial.rating }).map((_, i) => (
+                  <Star
+                    key={i}
+                    className="w-5 h-5 sm:w-6 sm:h-6 text-[#ffd44d] fill-current animate-pulse"
+                    style={{ animationDelay: `${i * 0.1}s` }}
                   />
-                </div>
-
-                <h4 className="text-lg sm:text-xl font-bold text-gray-900 mb-2">{currentTestimonial.parentName}</h4>
-                <p className="text-gray-600 mb-3 text-sm sm:text-base">{currentTestimonial.childInfo}</p>
-                <div className="flex items-center justify-center lg:justify-start gap-2 text-gray-500 mb-4">
-                  <MapPin className="w-3 h-3 sm:w-4 sm:h-4" />
-                  <span className="text-xs sm:text-sm">{currentTestimonial.location}</span>
-                </div>
-
-                {/* Rating */}
-                <div className="flex justify-center lg:justify-start gap-1 mb-4">
-                  {Array.from({ length: currentTestimonial.rating }).map((_, i) => (
-                    <Star
-                      key={i}
-                      className="w-4 h-4 sm:w-5 sm:h-5 text-[#ffd44d] fill-current animate-pulse"
-                      style={{ animationDelay: `${i * 0.1}s` }}
-                    />
-                  ))}
-                </div>
-
-                {/* Time at center */}
-                <div className="inline-flex items-center gap-2 bg-[#1d7748] text-white px-2 sm:px-3 py-1 rounded-full text-xs sm:text-sm font-medium">
-                  {currentTestimonial.timeAtCenter} con nosotros
-                </div>
+                ))}
               </div>
 
-              {/* Quote Section */}
-              <div className="flex-1">
-                <Quote className="w-6 h-6 sm:w-8 sm:h-8 text-[#1d7748] mb-4 sm:mb-6" />
-                <blockquote className="text-gray-700 text-base sm:text-lg lg:text-xl leading-relaxed mb-4 sm:mb-6 font-medium">
-                  {currentTestimonial.quote}
-                </blockquote>
+              {/* Author Info */}
+              <div className="space-y-2 sm:space-y-3">
+                <h4 className="text-xl sm:text-2xl font-bold text-gray-900">{currentTestimonial.parentName}</h4>
+                <p className="text-gray-600 text-base sm:text-lg">{currentTestimonial.childInfo}</p>
+                <div className="flex items-center justify-center gap-2 text-gray-500">
+                  <MapPin className="w-4 h-4" />
+                  <span className="text-sm sm:text-base">{currentTestimonial.location}</span>
+                </div>
+                
+                {/* Time at center */}
+                <div className="inline-flex items-center gap-2 bg-[#1d7748] text-white px-3 sm:px-4 py-2 rounded-full text-sm sm:text-base font-medium mt-4">
+                  {currentTestimonial.timeAtCenter} con nosotros
+                </div>
               </div>
             </div>
           </div>

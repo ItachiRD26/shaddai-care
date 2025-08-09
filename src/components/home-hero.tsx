@@ -1,17 +1,26 @@
 "use client"
 
-import { useState, useEffect } from "react"
+import { useEffect, useMemo, useState } from "react"
 import Link from "next/link"
 import { Button } from "@/components/ui/button"
-import { GraduationCap, Heart, BookOpen, ArrowRight, ChevronLeft, ChevronRight } from "lucide-react"
+import { ArrowRight, ChevronLeft, ChevronRight } from "lucide-react"
 
-const heroSlides = [
+type Slide = {
+  id: number
+  programName: string
+  subtitle: string
+  backgroundImage: string
+  primaryColor: "blue" | "green" | "orange"
+  link: string
+  isNew?: boolean
+}
+
+const heroSlides: Slide[] = [
   {
     id: 1,
     programName: "SHADDAI SCHOOL",
     subtitle: "Educación integral para el futuro",
     backgroundImage: "/images/hero-1.webp",
-    icon: GraduationCap,
     primaryColor: "blue",
     link: "/shaddai-school",
     isNew: true,
@@ -21,7 +30,6 @@ const heroSlides = [
     programName: "SHADDAI DAY-CARE",
     subtitle: "Cuidado profesional con amor",
     backgroundImage: "/images/hero-2.webp",
-    icon: Heart,
     primaryColor: "green",
     link: "/shaddai-daycare",
   },
@@ -30,58 +38,97 @@ const heroSlides = [
     programName: "GRACE LEARNING CENTER",
     subtitle: "Aprendizaje creativo y divertido",
     backgroundImage: "/images/hero-3.webp",
-    icon: BookOpen,
     primaryColor: "orange",
     link: "/grace-learning",
   },
 ]
 
-export default function HeroCarousel() {
+type HeroCarouselProps = {
+  // Opcional: establece manualmente la altura del navbar si prefieres no medirlo.
+  navHeight?: number
+}
+
+export default function HeroCarousel({ navHeight: navHeightProp }: HeroCarouselProps) {
   const [currentSlide, setCurrentSlide] = useState(0)
   const [imagesLoaded, setImagesLoaded] = useState(false)
   const [isAnimating, setIsAnimating] = useState(false)
+  const [measuredNavHeight, setMeasuredNavHeight] = useState<number | null>(null)
 
+  // Medimos la altura REAL del navbar fijo para que el hero inicie justo debajo sin huecos.
   useEffect(() => {
-    const preloadImages = async () => {
-      const imagePromises = heroSlides.map((slide) => {
-        return new Promise((resolve, reject) => {
-          const img = new Image()
-          img.crossOrigin = "anonymous"
-          img.onload = resolve
-          img.onerror = reject
-          img.src = slide.backgroundImage
-        })
-      })
+    if (typeof window === "undefined") return
 
-      try {
-        await Promise.all(imagePromises)
-        setImagesLoaded(true)
-      } catch (error) {
-        console.error("Error preloading images:", error)
-        setImagesLoaded(true)
-      }
+    // Intenta localizar el header/nav de manera robusta
+    const findHeader = () =>
+      (document.querySelector('[data-navbar="main"]') ||
+        document.querySelector("#main-navbar") ||
+        document.querySelector("header") ||
+        document.querySelector("nav")) as HTMLElement | null
+
+    const el = findHeader()
+    if (!el) {
+      if (navHeightProp != null) setMeasuredNavHeight(navHeightProp)
+      return
     }
 
-    preloadImages()
-  }, [])
+    const setHeight = () => setMeasuredNavHeight(Math.ceil(el.getBoundingClientRect().height))
 
-  const currentHero = heroSlides[currentSlide]
+    // Observa cambios de tamaño (responsive, etc.)
+    const ro = new ResizeObserver(() => setHeight())
+    ro.observe(el)
+    setHeight()
+
+    // Recalcula en resize/scroll por si el nav cambia ligeramente
+    const onResize = () => setHeight()
+    window.addEventListener("resize", onResize)
+    window.addEventListener("scroll", onResize, { passive: true })
+
+    return () => {
+      ro.disconnect()
+      window.removeEventListener("resize", onResize)
+      window.removeEventListener("scroll", onResize)
+    }
+  }, [navHeightProp])
+
+  const effectiveNavHeight = useMemo(() => {
+    // Prioriza medición; si no está disponible, usa prop; si no, 0
+    return measuredNavHeight ?? navHeightProp ?? 0
+  }, [measuredNavHeight, navHeightProp])
+
+  useEffect(() => {
+    const preload = async () => {
+      await Promise.all(
+        heroSlides.map(
+          (slide) =>
+            new Promise<void>((resolve) => {
+              const img = new Image()
+              img.crossOrigin = "anonymous"
+              img.onload = () => resolve()
+              img.onerror = () => resolve()
+              img.src = slide.backgroundImage
+            }),
+        ),
+      )
+      setImagesLoaded(true)
+    }
+    preload()
+  }, [])
 
   const goToPrevious = () => {
     if (isAnimating) return
     setIsAnimating(true)
     setCurrentSlide((prev) => (prev - 1 + heroSlides.length) % heroSlides.length)
-    setTimeout(() => setIsAnimating(false), 1000)
+    setTimeout(() => setIsAnimating(false), 600)
   }
 
   const goToNext = () => {
     if (isAnimating) return
     setIsAnimating(true)
     setCurrentSlide((prev) => (prev + 1) % heroSlides.length)
-    setTimeout(() => setIsAnimating(false), 1000)
+    setTimeout(() => setIsAnimating(false), 600)
   }
 
-  const getColorClasses = (color: string) => {
+  const getColorClasses = (color: Slide["primaryColor"]) => {
     switch (color) {
       case "blue":
         return "bg-[#4f75ff] hover:bg-[#4f75ff]/90"
@@ -94,7 +141,7 @@ export default function HeroCarousel() {
     }
   }
 
-  const getAccentColor = (color: string) => {
+  const getAccentColor = (color: Slide["primaryColor"]) => {
     switch (color) {
       case "blue":
         return "#4f75ff"
@@ -107,123 +154,112 @@ export default function HeroCarousel() {
     }
   }
 
-  return (
-    <section className="relative h-screen overflow-hidden bg-white">
-      {/* Distinctive Element - Floating Geometric Shapes */}
-      <div className="absolute inset-0 pointer-events-none overflow-hidden">
-        <div className="absolute top-20 right-10 w-32 h-32 bg-[#fcafc2]/10 rounded-full animate-pulse"></div>
-        <div
-          className="absolute bottom-32 left-16 w-24 h-24 bg-[#4f75ff]/10 rounded-full animate-bounce"
-          style={{ animationDuration: "3s" }}
-        ></div>
-        <div
-          className="absolute top-1/3 right-1/4 w-16 h-16 bg-[#ffd44d]/20 rotate-45 animate-spin"
-          style={{ animationDuration: "8s" }}
-        ></div>
-      </div>
+  const currentHero = heroSlides[currentSlide]
 
-      {/* Background Images */}
+  return (
+    <section
+      className="relative overflow-hidden bg-black"
+      // Sin huecos: empuja exactamente el alto del navbar y ajusta la altura del viewport restante
+      style={{
+        marginTop: `${effectiveNavHeight}px`,
+        minHeight: `calc(100svh - ${effectiveNavHeight}px)`,
+      }}
+      aria-label="Hero principal con carrusel"
+    >
+      {/* Slides de fondo */}
       {heroSlides.map((slide, index) => (
         <div
           key={slide.id}
-          className={`absolute inset-0 transition-all duration-1000 ease-out ${
+          className={`absolute inset-0 transition-all duration-700 ease-out will-change-transform ${
             index === currentSlide ? "opacity-100 scale-100" : "opacity-0 scale-105"
           }`}
+          aria-hidden={index !== currentSlide}
         >
           <div
-            className="absolute inset-0 bg-cover bg-center transition-transform duration-1000"
+            className="absolute inset-0 bg-cover bg-center"
             style={{
               backgroundImage: `url('${slide.backgroundImage}')`,
               backgroundPosition: "center 35%",
               backgroundSize: "cover",
             }}
           />
-          <div className="absolute inset-0 bg-black/20" />
+          {/* Overlay más intenso para mejor contraste en todo el contenido */}
+          <div className="absolute inset-0 bg-black/55" />
         </div>
       ))}
 
-      {/* Loading indicator */}
+      {/* Cargando */}
       {!imagesLoaded && (
-        <div className="absolute inset-0 bg-white flex items-center justify-center z-50">
-          <div className="text-gray-600 text-center animate-fade-in">
-            <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-[#1d7748] mx-auto mb-4"></div>
-            <p className="text-lg font-medium">Cargando experiencia...</p>
+        <div className="absolute inset-0 bg-black flex items-center justify-center z-40">
+          <div className="text-white/80 text-center">
+            <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-white mx-auto mb-4"></div>
+            Cargando...
           </div>
         </div>
       )}
 
-      {/* Navigation Arrows */}
+      {/* Flechas navegación (no colisionan con contenido centrado) */}
       <button
         onClick={goToPrevious}
         disabled={!imagesLoaded || isAnimating}
-        className="absolute left-4 top-1/2 transform -translate-y-1/2 z-20
-             bg-white/20 hover:bg-white/40 backdrop-blur-sm rounded-full p-2 sm:p-3
-             text-white transition-all duration-300
-             hover:scale-110 disabled:opacity-50 disabled:cursor-not-allowed
-             animate-fade-in border border-white/30"
+        className="absolute left-3 sm:left-4 md:left-6 top-1/2 -translate-y-1/2 z-30
+                   bg-white/15 hover:bg-white/30 backdrop-blur-sm rounded-full p-2 sm:p-3
+                   text-white transition-all duration-300 border border-white/30
+                   hover:scale-110 disabled:opacity-50 disabled:cursor-not-allowed focus:outline-none focus-visible:ring-2 focus-visible:ring-white/70"
         aria-label="Slide anterior"
       >
-        <ChevronLeft className="w-4 h-4 sm:w-5 sm:h-5" />
+        <ChevronLeft className="w-5 h-5 md:w-6 md:h-6" />
       </button>
 
       <button
         onClick={goToNext}
         disabled={!imagesLoaded || isAnimating}
-        className="absolute right-4 top-1/2 transform -translate-y-1/2 z-20
-             bg-white/20 hover:bg-white/40 backdrop-blur-sm rounded-full p-2 sm:p-3
-             text-white transition-all duration-300
-             hover:scale-110 disabled:opacity-50 disabled:cursor-not-allowed
-             animate-fade-in border border-white/30"
+        className="absolute right-3 sm:right-4 md:right-6 top-1/2 -translate-y-1/2 z-30
+                   bg-white/15 hover:bg-white/30 backdrop-blur-sm rounded-full p-2 sm:p-3
+                   text-white transition-all duration-300 border border-white/30
+                   hover:scale-110 disabled:opacity-50 disabled:cursor-not-allowed focus:outline-none focus-visible:ring-2 focus-visible:ring-white/70"
         aria-label="Siguiente slide"
       >
-        <ChevronRight className="w-4 h-4 sm:w-5 sm:h-5" />
+        <ChevronRight className="w-5 h-5 md:w-6 md:h-6" />
       </button>
 
-      {/* Content */}
-      <div className="relative z-10 h-full flex items-center">
+      {/* Contenido centrado y responsivo */}
+      <div className="relative z-20 flex items-center min-h-[60vh]">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full">
-          <div className="max-w-xl lg:max-w-2xl px-4 sm:px-0">
-            {/* New Launch Badge */}
+          <div className="max-w-3xl mx-auto text-center">
+            {/* Badge Nuevo */}
             {currentHero.isNew && (
-              <div className="mb-4 sm:mb-6 animate-fade-in-up" style={{ animationDelay: "0.2s" }}>
+              <div className="mb-4 sm:mb-6">
                 <span
-                  className="inline-flex items-center px-3 py-2 sm:px-4 sm:py-2 rounded-full text-xs sm:text-sm font-medium text-white shadow-sm animate-pulse"
+                  className="inline-flex items-center px-3 py-2 sm:px-4 sm:py-2 rounded-full text-xs sm:text-sm font-medium text-white shadow-sm"
                   style={{ backgroundColor: getAccentColor(currentHero.primaryColor) }}
                 >
-                  <span className="w-2 h-2 bg-white rounded-full mr-2 animate-ping"></span>
-                  Nuevo programa
+                  <span className="w-2 h-2 bg-white rounded-full mr-2 animate-ping" />
+                  {"Nuevo programa"}
                 </span>
               </div>
             )}
 
-            {/* Program Title */}
-            <h1
-              className="text-2xl sm:text-3xl md:text-5xl lg:text-6xl font-bold text-white leading-tight mb-3 sm:mb-4 animate-fade-in-up"
-              style={{ animationDelay: "0.4s" }}
-            >
+            {/* Título centrado */}
+            <h1 className="text-3xl sm:text-4xl md:text-6xl lg:text-7xl font-bold text-white leading-tight">
               {currentHero.programName}
             </h1>
 
-            {/* Subtitle */}
-            <p
-              className="text-base sm:text-lg md:text-xl text-white/90 mb-6 sm:mb-8 font-light animate-fade-in-up"
-              style={{ animationDelay: "0.6s" }}
-            >
-              {currentHero.subtitle}
-            </p>
+            {/* Subtítulo centrado */}
+            <p className="text-base sm:text-lg md:text-2xl text-white/90 mt-4 sm:mt-6">{currentHero.subtitle}</p>
 
-            {/* CTA Button */}
-            <div className="animate-fade-in-up" style={{ animationDelay: "0.8s" }}>
+            {/* CTA centrado */}
+            <div className="mt-6 sm:mt-8 flex justify-center">
               <Link href={currentHero.link}>
                 <Button
                   size="lg"
-                  className={`${getColorClasses(currentHero.primaryColor)} text-white cursor-pointer font-medium
-                             px-6 py-3 sm:px-8 sm:py-4 text-base sm:text-lg rounded-lg shadow-lg
-                             transition-all duration-300 hover:shadow-xl hover:scale-105
-                             flex items-center gap-2 sm:gap-3 w-fit group`}
+                  className={`${getColorClasses(
+                    currentHero.primaryColor,
+                  )} text-white cursor-pointer font-semibold px-6 py-3 sm:px-8 sm:py-4 text-base sm:text-lg rounded-lg shadow-lg
+                             transition-all duration-300 hover:shadow-xl hover:scale-105 flex items-center gap-2 sm:gap-3`}
                 >
-                  Conocer programa
-                  <ArrowRight className="w-4 h-4 sm:w-5 sm:h-5 group-hover:translate-x-1 transition-transform" />
+                  {"Conocer programa"}
+                  <ArrowRight className="w-4 h-4 sm:w-5 sm:h-5" />
                 </Button>
               </Link>
             </div>
@@ -231,24 +267,21 @@ export default function HeroCarousel() {
         </div>
       </div>
 
-      {/* Progress Indicators */}
-      <div
-        className="absolute bottom-6 sm:bottom-8 left-1/2 transform -translate-x-1/2 z-20 animate-fade-in"
-        style={{ animationDelay: "1s" }}
-      >
+      {/* Indicadores */}
+      <div className="absolute bottom-5 sm:bottom-7 left-1/2 -translate-x-1/2 z-30">
         <div className="flex space-x-2 sm:space-x-3">
           {heroSlides.map((_, index) => (
             <button
               key={index}
               disabled={!imagesLoaded || isAnimating}
               className={`h-1.5 sm:h-2 rounded-full transition-all duration-300 cursor-pointer disabled:cursor-not-allowed ${
-                index === currentSlide ? "bg-white w-6 sm:w-8 shadow-sm" : "bg-white/40 w-1.5 sm:w-2 hover:bg-white/60"
+                index === currentSlide ? "bg-white w-6 sm:w-8 shadow-sm" : "bg-white/50 w-1.5 sm:w-2 hover:bg-white/80"
               }`}
               onClick={() => {
                 if (!isAnimating) {
                   setIsAnimating(true)
                   setCurrentSlide(index)
-                  setTimeout(() => setIsAnimating(false), 1000)
+                  setTimeout(() => setIsAnimating(false), 600)
                 }
               }}
               aria-label={`Ir al slide ${index + 1}`}
