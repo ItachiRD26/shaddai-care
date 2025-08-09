@@ -289,7 +289,7 @@ export default function InscripcionPage() {
             {/* Timeline vertical informativa */}
             <div className="relative">
               <ol className="relative border-s-2 border-blue-100 pl-6 space-y-8 sm:space-y-10">
-                {steps.map((step, index) => {
+                {steps.map((step) => {
                   const IconComponent = step.icon
                   return (
                     <li key={step.number} className="relative">

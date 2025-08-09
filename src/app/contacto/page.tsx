@@ -2,7 +2,6 @@
 
 import type React from "react"
 import { useEffect, useRef, useState } from "react"
-import Link from "next/link"
 import { MapPin, Phone, Mail, Send, MessageCircle, Calendar, ChevronDown, ChevronUp, Heart, ArrowRight, Shield } from 'lucide-react'
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"

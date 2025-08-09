@@ -1,7 +1,7 @@
 "use client"
 
 import { useEffect, useRef, useState } from "react"
-import { Star, Quote, ChevronLeft, ChevronRight, MapPin } from 'lucide-react'
+import { Star, Quote, ChevronLeft, ChevronRight, MapPin } from "lucide-react"
 
 const testimonials = [
   {
@@ -134,10 +134,10 @@ export default function TestimonialsSection() {
             <div className="text-center max-w-4xl mx-auto">
               {/* Quote Icon */}
               <Quote className="w-8 h-8 sm:w-10 sm:h-10 text-[#1d7748] mx-auto mb-6 sm:mb-8" />
-              
+
               {/* Testimonial Quote */}
               <blockquote className="text-gray-700 text-lg sm:text-xl lg:text-2xl leading-relaxed mb-8 sm:mb-10 font-medium">
-                "{currentTestimonial.quote}"
+                {currentTestimonial.quote}
               </blockquote>
 
               {/* Rating */}
@@ -159,7 +159,7 @@ export default function TestimonialsSection() {
                   <MapPin className="w-4 h-4" />
                   <span className="text-sm sm:text-base">{currentTestimonial.location}</span>
                 </div>
-                
+
                 {/* Time at center */}
                 <div className="inline-flex items-center gap-2 bg-[#1d7748] text-white px-3 sm:px-4 py-2 rounded-full text-sm sm:text-base font-medium mt-4">
                   {currentTestimonial.timeAtCenter} con nosotros

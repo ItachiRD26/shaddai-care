@@ -1,41 +1,41 @@
 "use client"
 
-import { useState } from "react"
-import { Share2 } from 'lucide-react'
-import { cn } from "@/lib/utils"
+import { useCallback, useState } from "react"
+import { Share2 } from "lucide-react"
 
-type ShareButtonProps = {
+type Props = {
   title: string
-  text: string
+  text?: string
   className?: string
 }
 
-export default function ShareButton({ title, text, className }: ShareButtonProps) {
+export default function ShareButton({ title, text, className }: Props) {
   const [copied, setCopied] = useState(false)
 
-  const handleClick = async () => {
+  const onShare = useCallback(async () => {
     const url = typeof window !== "undefined" ? window.location.href : ""
-    try {
-      if (navigator.share) {
+    if (navigator.share) {
+      try {
         await navigator.share({ title, text, url })
-      } else if (navigator.clipboard && url) {
-        await navigator.clipboard.writeText(url)
-        setCopied(true)
-        setTimeout(() => setCopied(false), 1800)
+        return
+      } catch {
+        // Si el usuario cancela, seguimos al fallback
       }
-    } catch {
-      // Silenciar errores de cancelación
     }
-  }
+    try {
+      await navigator.clipboard.writeText(url)
+      setCopied(true)
+      setTimeout(() => setCopied(false), 1500)
+    } catch {
+      // Silencioso
+    }
+  }, [title, text])
 
   return (
     <button
-      onClick={handleClick}
-      className={cn(
-        "inline-flex items-center gap-2 text-blue-600 hover:text-blue-700 font-semibold",
-        className
-      )}
-      aria-label={copied ? "Enlace copiado" : "Compartir artículo"}
+      type="button"
+      onClick={onShare}
+      className={className ?? "inline-flex items-center gap-2 text-blue-600 hover:text-blue-700 font-semibold"}
     >
       <Share2 className="w-4 h-4" />
       {copied ? "Enlace copiado" : "Compartir"}

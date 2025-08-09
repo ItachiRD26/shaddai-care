@@ -1,15 +1,16 @@
 import Image from "next/image"
 import Link from "next/link"
 import { notFound } from "next/navigation"
-import { Calendar, Clock, Heart, MessageCircle, ArrowLeft, UserIcon, BookOpen } from 'lucide-react'
+import { Calendar, Clock, Heart, MessageCircle, ArrowLeft, BookOpen } from "lucide-react"
 import LayoutClientGeneral from "@/components/layout/layoutclientG"
-import { getPostBySlug, getRelatedPosts, formatHumanDate } from "@/lib/blog-data"
 import ShareButton from "@/components/blog/share-button"
+import { getPostBySlug, getRelatedPosts, formatHumanDate } from "@/lib/blog-data"
 
 type Params = { slug: string }
 
-export async function generateMetadata({ params }: { params: Params }) {
-  const post = getPostBySlug(params.slug)
+export async function generateMetadata({ params }: { params: Promise<Params> }) {
+  const { slug } = await params
+  const post = getPostBySlug(slug)
   if (!post) return { title: "Artículo no encontrado | Blog" }
   return {
     title: `${post.title} | Blog`,
@@ -23,16 +24,15 @@ export async function generateMetadata({ params }: { params: Params }) {
   }
 }
 
-export default function BlogArticlePage({ params }: { params: Params }) {
-  const post = getPostBySlug(params.slug)
+export default async function BlogArticlePage({ params }: { params: Promise<Params> }) {
+  const { slug } = await params
+  const post = getPostBySlug(slug)
   if (!post) return notFound()
-
-  const related = getRelatedPosts(params.slug, 3)
+  const related = getRelatedPosts(slug, 3)
 
   return (
     <LayoutClientGeneral>
       <article className="bg-white">
-        {/* Header/Hero profesional */}
         <header className="relative overflow-hidden bg-gradient-to-br from-blue-600 via-blue-700 to-blue-800">
           <div className="relative max-w-5xl mx-auto px-6 py-16 md:py-24 text-white">
             <Link href="/blog" className="inline-flex items-center gap-2 text-white/90 hover:text-white mb-6">
@@ -41,10 +41,6 @@ export default function BlogArticlePage({ params }: { params: Params }) {
             </Link>
 
             <div className="flex items-center gap-4 mb-6 text-white/90 text-sm flex-wrap">
-              <span className="inline-flex items-center gap-2">
-                <UserIcon className="w-4 h-4" />
-                {post.author}
-              </span>
               <span className="inline-flex items-center gap-2">
                 <Calendar className="w-4 h-4" />
                 {formatHumanDate(post.date)}
@@ -66,25 +62,15 @@ export default function BlogArticlePage({ params }: { params: Params }) {
             </div>
           </div>
 
-          {/* Cover image */}
           <div className="relative max-w-5xl mx-auto px-6 pb-8">
             <div className="relative w-full h-64 md:h-96 rounded-3xl overflow-hidden ring-1 ring-white/20 shadow-2xl -mt-4">
-              <Image
-                src={post.image || "/placeholder.svg"}
-                alt={post.title}
-                fill
-                className="object-cover"
-                priority
-              />
+              <Image src={post.image || "/placeholder.svg"} alt={post.title} fill className="object-cover" priority />
             </div>
           </div>
         </header>
 
-        {/* Content */}
         <section className="max-w-3xl mx-auto px-6 py-12 md:py-16 prose prose-blue prose-lg md:prose-xl">
-          {/* Nota: el contenido es HTML controlado desde lib/blog-data */}
           <div dangerouslySetInnerHTML={{ __html: post.content }} />
-          {/* Mini acciones */}
           <div className="mt-10 flex items-center justify-between border-t pt-6">
             <div className="text-gray-500 flex items-center gap-4 text-sm">
               <span className="inline-flex items-center gap-2">
@@ -104,7 +90,6 @@ export default function BlogArticlePage({ params }: { params: Params }) {
           </div>
         </section>
 
-        {/* Related posts */}
         {related.length > 0 && (
           <section className="max-w-6xl mx-auto px-6 pb-16">
             <h2 className="text-2xl md:text-3xl font-bold text-gray-900 mb-6">Artículos relacionados</h2>
@@ -122,19 +107,19 @@ export default function BlogArticlePage({ params }: { params: Params }) {
                       fill
                       className="object-cover group-hover:scale-105 transition-transform duration-500"
                     />
-                    <span className="absolute top-3 left-3 bg-blue-600 text-white text-xs px-2 py-1 rounded-full">
-                      <BookOpen className="w-3 h-3 inline-block mr-1" />
+                    <span className="absolute top-3 left-3 bg-blue-600 text-white text-xs px-2 py-1 rounded-full inline-flex items-center gap-1">
+                      <BookOpen className="w-3 h-3" />
                       {p.readTime}
                     </span>
                   </div>
                   <div className="p-4">
-                    <h3 className="font-bold text-gray-900 group-hover:text-blue-600 transition-colors">
-                      {p.title}
-                    </h3>
+                    <h3 className="font-bold text-gray-900 group-hover:text-blue-600 transition-colors">{p.title}</h3>
                     <p className="text-gray-600 text-sm mt-2 line-clamp-2">{p.excerpt}</p>
                     <div className="flex items-center gap-2 mt-3 flex-wrap">
                       {p.tags.slice(0, 2).map((t) => (
-                        <span key={t} className="bg-gray-100 text-gray-600 px-2 py-0.5 rounded text-xs">#{t}</span>
+                        <span key={t} className="bg-gray-100 text-gray-600 px-2 py-0.5 rounded text-xs">
+                          #{t}
+                        </span>
                       ))}
                     </div>
                   </div>
